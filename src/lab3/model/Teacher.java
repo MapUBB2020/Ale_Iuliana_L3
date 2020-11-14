@@ -13,11 +13,11 @@ public class Teacher extends Person{
         this.teacherID = teacherID;
     }
 
-    public long getTeacherID() {
+    public long getID() {
         return teacherID;
     }
 
-    public void setTeacherID(long teacherID) {
+    public void setID(long teacherID) {
         this.teacherID = teacherID;
     }
 
