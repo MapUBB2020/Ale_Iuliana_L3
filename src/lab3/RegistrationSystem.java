@@ -6,6 +6,7 @@ import lab3.repository.CourseRepository;
 import lab3.repository.StudentRepository;
 import lab3.repository.TeacherRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RegistrationSystem {
@@ -45,5 +46,18 @@ public class RegistrationSystem {
         } else {
             System.out.println("Maximum number of students reached! Please choose another course.");
         }
+    }
+
+    public List<Course> retrieveCoursesWithFreePlaces() {
+        List<Course> coursesWithFreePlaces = new ArrayList<Course>();
+        for (Course course : courseRepository.findAll())
+            if (course.getStudentsEnrolled().size() < course.getMaxEnrollment())
+                coursesWithFreePlaces.add(course);
+        return coursesWithFreePlaces;
+    }
+    //cand afisez o sa fac un for si afisez pt fiecare curs numarul de locuri libere
+
+    public List<Course> getAllCourses() {
+        return courseRepository.findAll();
     }
 }
