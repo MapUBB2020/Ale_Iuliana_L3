@@ -3,22 +3,22 @@ package lab3.model;
 import java.util.List;
 
 public class Student extends Person{
-    private long studentId;
+    private Long studentId;
     private int totalCredits;
     private List<Course> enrolledCourses;
 
-    public Student(long studentId, int totalCredits, List<Course> enrolledCourses, List<Student> students, String firstName, String lastName) {
+    public Student(Long studentId, int totalCredits, List<Course> enrolledCourses, String firstName, String lastName) {
         super(firstName,lastName);
         this.studentId = studentId;
         this.totalCredits = totalCredits;
         this.enrolledCourses = enrolledCourses;
     }
 
-    public long getId() {
+    public Long getId() {
         return studentId;
     }
 
-    public void setId(long studentId) {
+    public void setId(Long studentId) {
         this.studentId = studentId;
     }
 
