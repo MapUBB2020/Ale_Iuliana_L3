@@ -7,14 +7,14 @@ import java.util.List;
 
 public class StudentRepository implements ICrudRepository<Student>{
 
-    private List<Student> students;
+    List<Student> students;
     /**
      *  @return the student with the specified id or null - if there is no student with the given id
      *  */
     @Override
     public Student findOne(Long id) {
         for (Student stud: students) {
-            if (stud.getStudentId() == id)
+            if (stud.getId() == id)
                 return stud;
         }
         return null;
@@ -37,7 +37,7 @@ public class StudentRepository implements ICrudRepository<Student>{
     @Override
     public Student save(Student entity) {
         for (Student stud: students) {
-            if (stud.getStudentId() == entity.getStudentId() && stud.getTotalCredits() == entity.getTotalCredits())
+            if (stud.getId() == entity.getId() && stud.getTotalCredits() == entity.getTotalCredits())
                 return null;
         }
         return entity;
@@ -51,7 +51,7 @@ public class StudentRepository implements ICrudRepository<Student>{
     @Override
     public Student delete(Long id) {
         for (Student stud: students) {
-            if (stud.getStudentId() == id)
+            if (stud.getId() == id)
                 return stud;
         }
         return null;
@@ -65,7 +65,7 @@ public class StudentRepository implements ICrudRepository<Student>{
     @Override
     public Student update(Student entity){
         for (Student stud: students) {
-            if (stud.getStudentId() == entity.getStudentId()){
+            if (stud.getId() == entity.getId()){
                 stud.setFirstName(entity.getFirstName());
                 stud.setLastName(entity.getLastName());
                 stud.setTotalCredits(entity.getTotalCredits());
