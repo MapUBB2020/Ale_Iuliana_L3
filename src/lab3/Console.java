@@ -3,7 +3,12 @@ package lab3;
 import lab3.controller.CourseController;
 import lab3.controller.StudentController;
 import lab3.controller.TeacherController;
+import lab3.model.Course;
+import lab3.model.Student;
+import lab3.model.Teacher;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Console {
@@ -40,15 +45,65 @@ public class Console {
                     case 0:
                         run = false;
                         break;
-                    case 1:
+                    case 1: {
+                        System.out.println("Info about Student");
+                        System.out.println("First Name: ");
+                        String firstName = scanner.nextLine();
+                        System.out.println("Last Name:");
+                        String lastName = scanner.nextLine();
+                        System.out.println("Id: ");
+                        Long IdStudent = scanner.nextLong();
+                        System.out.println("Number of credits: ");
+                        int nrCredits = scanner.nextInt();
+                        List<Course> coursesStudent = new ArrayList<Course>(); //???
+                        Student stud = new Student(IdStudent, nrCredits, coursesStudent, firstName, lastName);
+
+                        System.out.println("Info about Course");
+                        System.out.println("Id: ");
+                        Long IdCourse = scanner.nextLong();
+                        System.out.println("Name:");
+                        String Name = scanner.nextLine();
+                        System.out.println("Maximum enrollment: ");
+                        int maxEnrollment = scanner.nextInt();
+                        List<Student> students = new ArrayList<Student>();
+                        System.out.println("Credits: ");
+                        int credits = scanner.nextInt();
+
+                        System.out.println("Info about teacher: ");
+                        System.out.println("Id: ");
+                        int teacherId = scanner.nextInt();
+                        System.out.println("First name: ");
+                        String firstNameTeacher = scanner.nextLine();
+                        System.out.println("Last name: ");
+                        String lastNameTeacher = scanner.nextLine();
+                        List<Course> coursesTeacher = new ArrayList<Course>(); //???
+                        Teacher teacher = new Teacher(coursesTeacher,teacherId,firstNameTeacher,lastNameTeacher);
+
+                        Course course = new Course(IdCourse, Name, teacher, maxEnrollment, students, credits);
+                        regsys.register(course, stud);
                         break;
+                    }
                     case 2:
+                        regsys.retrieveCoursesWithFreePlaces();
                         break;
                     case 3:
+                        System.out.println("Course details");
+                        System.out.println("Id: ");
+                        Long courseId = scanner.nextLong();
+                        Course course = new Course(courseId, null,null,0,null,0);
+                        regsys.retrieveStudentsEnrolledForACourse(course);
                         break;
                     case 4:
+                        regsys.getAllCourses();
                         break;
                     case 5:
+                        System.out.println("Teacher Id: ");
+                        Long teacherId = scanner.nextLong();
+                        Teacher teacher = new Teacher(null, teacherId, null, null);
+                        System.out.println("Course Id: ");
+                        Long courseIdNew = scanner.nextLong();
+                        Course course1 = new Course(courseIdNew, null, null, 0, null,0);
+                        regsys.deleteCourse(teacher, course1);
                         break;
                     default:
                         System.out.println("Option doesn't exist. Choose another.");
