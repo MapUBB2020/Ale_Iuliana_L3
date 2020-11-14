@@ -1,15 +1,19 @@
 package lab3.repository;
 
+import lab3.model.Course;
 import lab3.model.Student;
+
+import java.util.List;
 
 public class StudentRepository implements ICrudRepository<Student>{
 
+    private List<Student> students;
     /**
      *  @return the student with the specified id or null - if there is no student with the given id
      *  */
     @Override
     public Student findOne(Long id) {
-        for (Student stud: Student.getStudents()) {
+        for (Student stud: students) {
             if (stud.getStudentId() == id)
                 return stud;
         }
@@ -22,7 +26,7 @@ public class StudentRepository implements ICrudRepository<Student>{
      */
     @Override
     public Iterable<Student> findAll() {
-        return Student.getStudents();
+        return students;
     }
 
     /**
@@ -32,7 +36,7 @@ public class StudentRepository implements ICrudRepository<Student>{
      */
     @Override
     public Student save(Student entity) {
-        for (Student stud: Student.getStudents()) {
+        for (Student stud: students) {
             if (stud.getStudentId() == entity.getStudentId() && stud.getTotalCredits() == entity.getTotalCredits())
                 return null;
         }
@@ -46,7 +50,7 @@ public class StudentRepository implements ICrudRepository<Student>{
      */
     @Override
     public Student delete(Long id) {
-        for (Student stud: Student.getStudents()) {
+        for (Student stud: students) {
             if (stud.getStudentId() == id)
                 return stud;
         }
@@ -59,9 +63,11 @@ public class StudentRepository implements ICrudRepository<Student>{
      * @return null - if the student is updated, otherwise returns the entity - (e.g id does not exist).
      */
     @Override
-    public Student update(Student entity) {
-        for (Student stud: Student.getStudents()) {
+    public Student update(Student entity){
+        for (Student stud: students) {
             if (stud.getStudentId() == entity.getStudentId()){
+                stud.setFirstName(entity.getFirstName());
+                stud.setLastName(entity.getLastName());
                 stud.setTotalCredits(entity.getTotalCredits());
                 stud.setEnrolledCourses(entity.getEnrolledCourses());
                 return null;
