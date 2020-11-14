@@ -2,6 +2,7 @@ package lab3;
 
 import lab3.model.Course;
 import lab3.model.Student;
+import lab3.model.Teacher;
 import lab3.repository.CourseRepository;
 import lab3.repository.StudentRepository;
 import lab3.repository.TeacherRepository;
@@ -59,5 +60,24 @@ public class RegistrationSystem {
 
     public List<Course> getAllCourses() {
         return courseRepository.findAll();
+    }
+
+    public List<Student> retrieveStudentsEnrolledForACourse(Course course) {
+        return course.getStudentsEnrolled();
+    }
+
+    public void deleteCourse(Teacher teacher, Course course) {
+        teacher.getCourses().remove(course);
+        teacherRepository.update(teacher);
+        for (Student stud: course.getStudentsEnrolled()) {
+            stud.setTotalCredits(stud.getTotalCredits() - course.getCredits());
+            for (Course c: stud.getEnrolledCourses()) {
+                if (c.equals(course)) {
+                    stud.getEnrolledCourses().remove(course);
+                    studentRepository.update(stud);
+                }
+            }
+        }
+        courseRepository.delete(course.getId());
     }
 }
