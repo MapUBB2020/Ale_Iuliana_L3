@@ -6,12 +6,12 @@ import lab3.model.Teacher;
 import java.util.List;
 
 public class TeacherRepository implements ICrudRepository<Teacher>{
-    private List<Teacher> teachers;
+    List<Teacher> teachers;
 
     @Override
     public Teacher findOne(Long id) {
         for (Teacher teacher: teachers) {
-            if (teacher.getTeacherID() == id)
+            if (teacher.getID() == id)
                 return teacher;
         }
         return null;
@@ -25,7 +25,7 @@ public class TeacherRepository implements ICrudRepository<Teacher>{
     @Override
     public Teacher save(Teacher entity) {
         for (Teacher teacher: teachers) {
-            if (teacher.getTeacherID() == entity.getTeacherID())
+            if (teacher.getID() == entity.getID())
                 return null;
         }
         return entity;
@@ -34,7 +34,7 @@ public class TeacherRepository implements ICrudRepository<Teacher>{
     @Override
     public Teacher delete(Long id) {
         for (Teacher teacher: teachers) {
-            if (teacher.getTeacherID() == id)
+            if (teacher.getID() == id)
                 return teacher;
         }
         return null;
@@ -43,7 +43,7 @@ public class TeacherRepository implements ICrudRepository<Teacher>{
     @Override
     public Teacher update(Teacher entity) {
         for (Teacher teacher: teachers) {
-            if (teacher.getTeacherID() == entity.getTeacherID()){
+            if (teacher.getID() == entity.getID()){
                 teacher.setFirstName(entity.getFirstName());
                 teacher.setLastName(entity.getLastName());
                 teacher.setCourses(entity.getCourses());
