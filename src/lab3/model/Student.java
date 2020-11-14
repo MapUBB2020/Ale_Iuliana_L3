@@ -5,8 +5,8 @@ import java.util.List;
 public class Student implements Person{
     private long studentId;
     private int totalCredits;
-    private List<Course> enrolledCourses;
-    private List<Student> students;
+    private static List<Course> enrolledCourses;
+    private static List<Student> students;
 
 
     public Student(long studentId, int totalCredits, List<Course> enrolledCourses, List<Student> students) {
@@ -39,12 +39,19 @@ public class Student implements Person{
         this.enrolledCourses = enrolledCourses;
     }
 
-    public List<Student> getStudents() {
+    public static List<Student> getStudents() {
         return students;
     }
     public void setStudents(List<Student> students) {
         this.students = students;
     }
 
-
+    @Override
+    public String toString(){
+        String string = "";
+        string = this.studentId + " " + this.totalCredits;
+        for (Course course : enrolledCourses)
+            string += course.getName() + ", ";
+        return string;
+    }
 }
