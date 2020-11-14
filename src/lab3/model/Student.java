@@ -14,11 +14,11 @@ public class Student extends Person{
         this.enrolledCourses = enrolledCourses;
     }
 
-    public long getStudentId() {
+    public long getId() {
         return studentId;
     }
 
-    public void setStudentId(long studentId) {
+    public void setId(long studentId) {
         this.studentId = studentId;
     }
 
