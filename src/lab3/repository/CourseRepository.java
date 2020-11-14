@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CourseRepository implements ICrudRepository<Course>{
-    List<Course> courseRepo = new ArrayList<Course>();
+    List<Course> courseRepo;
 
     @Override
     public Course findOne(Long id) {
