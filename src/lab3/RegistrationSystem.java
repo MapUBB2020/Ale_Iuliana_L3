@@ -38,12 +38,12 @@ public class RegistrationSystem {
     public void register(Long id, Student student) {
         Course course = new Course();
         for (Course newCourse: courseRepository.findAll()) {
-            if (course.getId().equals(id)) {
+            if (newCourse.getId().equals(id)) {
                 course = newCourse;
             }
         }
 
-        if (course.getMaxEnrollment() == course.getStudentsEnrolled().size()) {
+        if (course.getMaxEnrollment() > course.getStudentsEnrolled().size()) {
             List<Course> enrolledCourses = student.getEnrolledCourses();
             enrolledCourses.add(course);
             student.setEnrolledCourses(enrolledCourses);
@@ -84,7 +84,7 @@ public class RegistrationSystem {
     public List<Student> retrieveStudentsEnrolledForACourse(Long id) {
         Course course = new Course();
         for (Course newCourse: courseRepository.findAll()) {
-            if (course.getId().equals(id)) {
+            if (newCourse.getId().equals(id)) {
                 course = newCourse;
             }
         }
