@@ -74,7 +74,13 @@ public class Console {
                         break;
                     }
                     case 2:
-                        regsys.retrieveCoursesWithFreePlaces();
+
+                        List<Course> list = regsys.retrieveCoursesWithFreePlaces();
+                        System.out.println(list);
+                        for (Course course : list) {
+                            int nrCredits = course.getMaxEnrollment() - course.getStudentsEnrolled().size();
+                            System.out.println(nrCredits);
+                        }
                         break;
                     case 3:
                         System.out.println("Course details");
