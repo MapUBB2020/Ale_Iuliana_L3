@@ -47,34 +47,30 @@ public class Console {
                         Student student = new Student();
                         System.out.println("Id: ");
                         Long IdStudent = scanner.nextLong();
-                        regsys.
                         for (Student stud : regsys.getStudentRepository().findAll()) {
                             if (stud.getId().equals(IdStudent)) {
                                 student = stud; //stud(eC: bd, sda)
                             } else {
+                                System.out.println("First Name: ");
+                                String firstName = scanner.nextLine();
+                                System.out.println("Last Name:");
+                                String lastName = scanner.nextLine();
+                                System.out.println("Number of credits: ");
+                                int nrCredits = scanner.nextInt();
                                 student.setId(IdStudent);
                                 student.setFirstName(firstName);
                                 student.setLastName(lastName);
-
+                                student.setTotalCredits(nrCredits);
+                                List<Course> coursesStudent = new ArrayList<Course>(); //???
+                                student = new Student(IdStudent, nrCredits, coursesStudent, firstName, lastName);
                             }
                         }
-
-                        System.out.println("First Name: ");
-                        String firstName = scanner.nextLine();
-                        System.out.println("Last Name:");
-                        String lastName = scanner.nextLine();
-                        System.out.println("Id: ");
-                        Long IdStudent = scanner.nextLong();
-                        System.out.println("Number of credits: ");
-                        int nrCredits = scanner.nextInt();
-                        List<Course> coursesStudent = new ArrayList<Course>(); //???
-                        Student stud = new Student(IdStudent, nrCredits, coursesStudent, firstName, lastName);
 
                         System.out.println("Info about Course");
                         System.out.println("Id: ");
                         Long IdCourse = scanner.nextLong();
 
-                        regsys.register(Idcourse, stud);
+                        regsys.register(Idcourse, student);
                         break;
                     }
                     case 2:
@@ -84,8 +80,7 @@ public class Console {
                         System.out.println("Course details");
                         System.out.println("Id: ");
                         Long courseId = scanner.nextLong();
-                        Course course = new Course(courseId, null,null,0,null,0);
-                        regsys.retrieveStudentsEnrolledForACourse(course);
+                        regsys.retrieveStudentsEnrolledForACourse(courseId);
                         break;
                     case 4:
                         regsys.getAllCourses();
@@ -93,11 +88,9 @@ public class Console {
                     case 5:
                         System.out.println("Teacher Id: ");
                         Long teacherId = scanner.nextLong();
-                        Teacher teacher = new Teacher(null, teacherId, null, null);
                         System.out.println("Course Id: ");
                         Long courseIdNew = scanner.nextLong();
-                        Course course1 = new Course(courseIdNew, null, null, 0, null,0);
-                        regsys.deleteCourse(teacher, course1);
+                        regsys.deleteCourse(teacherId, courseIdNew);
                         break;
                     default:
                         System.out.println("Option doesn't exist. Choose another.");
