@@ -7,6 +7,9 @@ public class Student extends Person{
     private int totalCredits;
     private List<Course> enrolledCourses;
 
+    public Student(){
+        super();
+    }
     public Student(Long studentId, int totalCredits, List<Course> enrolledCourses, String firstName, String lastName) {
         super(firstName,lastName);
         this.studentId = studentId;
