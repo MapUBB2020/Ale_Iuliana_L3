@@ -89,7 +89,7 @@ public class Console {
                         regsys.retrieveStudentsEnrolledForACourse(courseId);
                         break;
                     case 4:
-                        regsys.getAllCourses();
+                        System.out.println(regsys.getAllCourses());
                         break;
                     case 5:
                         System.out.println("Teacher Id: ");
