@@ -6,6 +6,9 @@ import lab3.controller.TeacherController;
 import lab3.model.Course;
 import lab3.model.Student;
 import lab3.model.Teacher;
+import lab3.view.CourseView;
+import lab3.view.StudentView;
+import lab3.view.TeacherView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,14 +20,8 @@ public class Console {
     StudentController studentController;
     TeacherController teacherController;
 
-    public Console(RegistrationSystem regsys,
-                   CourseController courseController,
-                   StudentController studentController,
-                   TeacherController teacherController) {
+    public Console(RegistrationSystem regsys) {
         this.regsys = regsys;
-        this.courseController = courseController;
-        this.studentController = studentController;
-        this.teacherController = teacherController;
     }
 
     public void run() {
