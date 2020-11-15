@@ -7,6 +7,10 @@ public class Teacher extends Person{
     private long teacherID;
     private List<Course> courses;
 
+    public Teacher() {
+        super();
+    }
+
     public Teacher(List<Course> courses, long teacherID, String firstName, String lastName) {
         super(firstName,lastName);
         this.courses = courses;
