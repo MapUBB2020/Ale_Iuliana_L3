@@ -3,11 +3,13 @@ package lab3.repository;
 import lab3.model.Course;
 import lab3.model.Student;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class StudentRepository implements ICrudRepository<Student>{
 
-    List<Student> students;
+    List<Student> students = new ArrayList<>();
+
     /**
      *  @return the student with the specified id or null - if there is no student with the given id
      *  */
@@ -26,7 +28,9 @@ public class StudentRepository implements ICrudRepository<Student>{
      */
     @Override
     public Iterable<Student> findAll() {
-        return students;
+        if (students.size() != 0)
+            return students;
+        return new ArrayList<>();
     }
 
     /**
