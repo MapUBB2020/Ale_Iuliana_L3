@@ -10,6 +10,9 @@ public class Course {
     private List<Student> studentsEnrolled;
     private int credits;
 
+    public Course() {
+    }
+
     public Course(Long id, String name, Person teacher, int maxEnrollment, List<Student> studentsEnrolled, int credits) {
         this.id = id;
         this.name = name;
