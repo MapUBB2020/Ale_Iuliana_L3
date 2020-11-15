@@ -94,8 +94,15 @@ public class RegistrationSystem {
     public void deleteCourse(Long idTeacher, Long idCourse) {
         Teacher teacher = new Teacher();
         for (Teacher newTeacher: teacherRepository.findAll()) {
-            if (newTeacher.getID()) {
+            if (newTeacher.getID() == idTeacher) {
                 teacher = newTeacher;
+            }
+        }
+
+        Course course = new Course();
+        for (Course newCourse: courseRepository.findAll()) {
+            if (course.getId().equals(idCourse)) {
+                course = newCourse;
             }
         }
         teacher.getCourses().remove(course);
@@ -103,7 +110,7 @@ public class RegistrationSystem {
         for (Student stud: course.getStudentsEnrolled()) {
             stud.setTotalCredits(stud.getTotalCredits() - course.getCredits());
             for (Course c: stud.getEnrolledCourses()) {
-                if (c.(course)) {
+                if (c.getId().equals(course.getId())) {
                     stud.getEnrolledCourses().remove(course);
                     studentRepository.update(stud);
                 }
