@@ -1,12 +1,16 @@
 package lab3.repository;
 
+import lab3.model.Course;
 import lab3.model.Student;
 import lab3.model.Teacher;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class TeacherRepository implements ICrudRepository<Teacher>{
-    List<Teacher> teachers;
+    List<Teacher> teachers = Arrays.asList(new Teacher(new ArrayList<Course>(), (long) 1, "Catalin", "Rusu"),
+            new Teacher(new ArrayList<Course>(), (long) 2, "Diana", "Troanca"));
 
     @Override
     public Teacher findOne(Long id) {
