@@ -47,6 +47,21 @@ public class Console {
                         break;
                     case 1: {
                         System.out.println("Info about Student");
+                        Student student = new Student();
+                        System.out.println("Id: ");
+                        Long IdStudent = scanner.nextLong();
+                        regsys.
+                        for (Student stud : regsys.getStudentRepository().findAll()) {
+                            if (stud.getId().equals(IdStudent)) {
+                                student = stud; //stud(eC: bd, sda)
+                            } else {
+                                student.setId(IdStudent);
+                                student.setFirstName(firstName);
+                                student.setLastName(lastName);
+
+                            }
+                        }
+
                         System.out.println("First Name: ");
                         String firstName = scanner.nextLine();
                         System.out.println("Last Name:");
@@ -61,26 +76,8 @@ public class Console {
                         System.out.println("Info about Course");
                         System.out.println("Id: ");
                         Long IdCourse = scanner.nextLong();
-                        System.out.println("Name:");
-                        String Name = scanner.nextLine();
-                        System.out.println("Maximum enrollment: ");
-                        int maxEnrollment = scanner.nextInt();
-                        List<Student> students = new ArrayList<Student>();
-                        System.out.println("Credits: ");
-                        int credits = scanner.nextInt();
 
-                        System.out.println("Info about teacher: ");
-                        System.out.println("Id: ");
-                        int teacherId = scanner.nextInt();
-                        System.out.println("First name: ");
-                        String firstNameTeacher = scanner.nextLine();
-                        System.out.println("Last name: ");
-                        String lastNameTeacher = scanner.nextLine();
-                        List<Course> coursesTeacher = new ArrayList<Course>(); //???
-                        Teacher teacher = new Teacher(coursesTeacher,teacherId,firstNameTeacher,lastNameTeacher);
-
-                        Course course = new Course(IdCourse, Name, teacher, maxEnrollment, students, credits);
-                        regsys.register(course, stud);
+                        regsys.register(Idcourse, stud);
                         break;
                     }
                     case 2:
