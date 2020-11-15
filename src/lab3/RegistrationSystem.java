@@ -23,7 +23,26 @@ public class RegistrationSystem {
         this.teacherRepository = teacherRepository;
     }
 
-    public void register(Course course, Student student) {
+    public CourseRepository getCourseRepository() {
+        return courseRepository;
+    }
+
+    public StudentRepository getStudentRepository() {
+        return studentRepository;
+    }
+
+    public TeacherRepository getTeacherRepository() {
+        return teacherRepository;
+    }
+
+    public void register(Long id, Student student) {
+        Course course = new Course();
+        for (Course newCourse: courseRepository.findAll()) {
+            if (course.getId().equals(id)) {
+                course = newCourse;
+            }
+        }
+
         if (course.getMaxEnrollment() == course.getStudentsEnrolled().size()) {
             List<Course> enrolledCourses = student.getEnrolledCourses();
             enrolledCourses.add(course);
@@ -62,17 +81,29 @@ public class RegistrationSystem {
         return courseRepository.findAll();
     }
 
-    public List<Student> retrieveStudentsEnrolledForACourse(Course course) {
+    public List<Student> retrieveStudentsEnrolledForACourse(Long id) {
+        Course course = new Course();
+        for (Course newCourse: courseRepository.findAll()) {
+            if (course.getId().equals(id)) {
+                course = newCourse;
+            }
+        }
         return course.getStudentsEnrolled();
     }
 
-    public void deleteCourse(Teacher teacher, Course course) {
+    public void deleteCourse(Long idTeacher, Long idCourse) {
+        Teacher teacher = new Teacher();
+        for (Teacher newTeacher: teacherRepository.findAll()) {
+            if (newTeacher.getID()) {
+                teacher = newTeacher;
+            }
+        }
         teacher.getCourses().remove(course);
         teacherRepository.update(teacher);
         for (Student stud: course.getStudentsEnrolled()) {
             stud.setTotalCredits(stud.getTotalCredits() - course.getCredits());
             for (Course c: stud.getEnrolledCourses()) {
-                if (c.equals(course)) {
+                if (c.(course)) {
                     stud.getEnrolledCourses().remove(course);
                     studentRepository.update(stud);
                 }
