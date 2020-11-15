@@ -2,12 +2,17 @@ package lab3.repository;
 
 import lab3.model.Course;
 import lab3.model.Person;
+import lab3.model.Student;
+import lab3.model.Teacher;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class CourseRepository implements ICrudRepository<Course>{
-    List<Course> courseRepo;
+    List<Course> courseRepo = Arrays.asList(
+            new Course((long) 1, "BD", new Teacher(new ArrayList<Course>(), (long) 2, "Diana", "Troanca"), 30, new ArrayList<Student>(),6),
+            new Course((long) 2, "MAP", new Teacher(new ArrayList<Course>(), (long) 1, "Catalin", "Rusu"), 30, new ArrayList<Student>(),6));
 
     @Override
     public Course findOne(Long id) {
