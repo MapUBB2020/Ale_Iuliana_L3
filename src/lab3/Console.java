@@ -70,7 +70,7 @@ public class Console {
                         System.out.println("Id: ");
                         Long IdCourse = scanner.nextLong();
 
-                        regsys.register(Idcourse, student);
+                        regsys.register(IdCourse, student);
                         break;
                     }
                     case 2:
