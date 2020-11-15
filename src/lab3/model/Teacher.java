@@ -4,14 +4,14 @@ import java.util.List;
 
 public class Teacher extends Person{
 
-    private long teacherID;
+    private Long teacherID;
     private List<Course> courses;
 
     public Teacher() {
         super();
     }
 
-    public Teacher(List<Course> courses, long teacherID, String firstName, String lastName) {
+    public Teacher(List<Course> courses, Long teacherID, String firstName, String lastName) {
         super(firstName,lastName);
         this.courses = courses;
         this.teacherID = teacherID;
@@ -21,7 +21,7 @@ public class Teacher extends Person{
         return teacherID;
     }
 
-    public void setID(long teacherID) {
+    public void setID(Long teacherID) {
         this.teacherID = teacherID;
     }
 
