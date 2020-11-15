@@ -47,7 +47,8 @@ public class Console {
                         Student student = new Student();
                         System.out.println("Id: ");
                         Long IdStudent = scanner.nextLong();
-                        for (Student stud : regsys.getStudentRepository().findAll()) {
+                        List<Student> allStudents = (List<Student>) regsys.getStudentRepository().findAll();
+                        for (Student stud : allStudents) {
                             if (stud.getId().equals(IdStudent)) {
                                 student = stud; //stud(eC: bd, sda)
                             } else {
@@ -65,7 +66,20 @@ public class Console {
                                 student = new Student(IdStudent, nrCredits, coursesStudent, firstName, lastName);
                             }
                         }
-
+                        if (allStudents.size() == 0) {
+                            System.out.println("First Name: ");
+                            String firstName = scanner.nextLine();
+                            System.out.println("Last Name:");
+                            String lastName = scanner.nextLine();
+                            System.out.println("Number of credits: ");
+                            int nrCredits = scanner.nextInt();
+                            student.setId(IdStudent);
+                            student.setFirstName(firstName);
+                            student.setLastName(lastName);
+                            student.setTotalCredits(nrCredits);
+                            List<Course> coursesStudent = new ArrayList<Course>(); //???
+                            student = new Student(IdStudent, nrCredits, coursesStudent, firstName, lastName);
+                        }
                         System.out.println("Info about Course");
                         System.out.println("Id: ");
                         Long IdCourse = scanner.nextLong();
@@ -86,10 +100,25 @@ public class Console {
                         System.out.println("Course details");
                         System.out.println("Id: ");
                         Long courseId = scanner.nextLong();
-                        regsys.retrieveStudentsEnrolledForACourse(courseId);
+                        List<Student> students = regsys.retrieveStudentsEnrolledForACourse(courseId);
+                        for (Student student: students) {
+                            System.out.println(student.getFirstName());
+                            System.out.println(student.getLastName());
+                        }
                         break;
                     case 4:
-                        System.out.println(regsys.getAllCourses());
+                        List<Course> allCourses = regsys.getAllCourses();
+                        for (Course course: allCourses) {
+                            CourseView courseView = new CourseView();
+                            courseController = new CourseController(course, courseView);
+                            courseView.printCourseDetails(courseController.getCourseName(),
+                                    courseController.getCourseTeacher(),
+                                    courseController.getCourseMaxEnrollment(),
+                                    courseController.getCourseStudentsEnrolled(),
+                                    courseController.getCourseCredits()
+                            );
+                        }
+                        //System.out.println(regsys.getAllCourses());
                         break;
                     case 5:
                         System.out.println("Teacher Id: ");
