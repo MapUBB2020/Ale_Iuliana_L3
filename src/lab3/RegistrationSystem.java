@@ -77,8 +77,8 @@ public class RegistrationSystem {
     }
     //cand afisez o sa fac un for si afisez pt fiecare curs numarul de locuri libere
 
-    public List<Course> getAllCourses() {
-        return courseRepository.findAll();
+    public void getAllCourses() {
+        System.out.println(( courseRepository.findAll()));
     }
 
     public List<Student> retrieveStudentsEnrolledForACourse(Long id) {
