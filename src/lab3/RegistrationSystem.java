@@ -98,14 +98,15 @@ public class RegistrationSystem {
                 teacher = newTeacher;
             }
         }
-
         Course course = new Course();
         for (Course newCourse: courseRepository.findAll()) {
-            if (course.getId().equals(idCourse)) {
+            if (newCourse.getId().equals(idCourse)) {
                 course = newCourse;
             }
         }
-        teacher.getCourses().remove(course);
+        List<Course> teacherCourses = teacher.getCourses();
+        teacherCourses.remove(course);
+        teacher.setCourses(teacherCourses);
         teacherRepository.update(teacher);
         for (Student stud: course.getStudentsEnrolled()) {
             stud.setTotalCredits(stud.getTotalCredits() - course.getCredits());
