@@ -35,7 +35,7 @@ public class RegistrationSystem {
         return teacherRepository;
     }
 
-    public void register(Long id, Student student) {
+    public boolean register(Long id, Student student) {
         Course course = new Course();
         for (Course newCourse: courseRepository.findAll()) {
             if (newCourse.getId().equals(id)) {
@@ -60,12 +60,14 @@ public class RegistrationSystem {
                     studentRepository.save(student);
                 }
                 courseRepository.update(course);
+                return true;
             } else {
                 System.out.println("Maximum credits for student reached! Cannot choose this course.");
             }
         } else {
             System.out.println("Maximum number of students reached! Please choose another course.");
         }
+        return false;
     }
 
     public List<Course> retrieveCoursesWithFreePlaces() {
