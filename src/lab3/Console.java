@@ -24,24 +24,21 @@ public class Console {
         this.regsys = regsys;
     }
 
-    public Student getStudentData(Long IdStudent){
+    public void getStudentData(Long IdStudent){
         Scanner scanner = new Scanner(System.in);
-        Student student = new Student();
+        //Student student = new Student();
 
         System.out.println("First Name: ");
         String firstName = scanner.nextLine();
         System.out.println("Last Name:");
         String lastName = scanner.nextLine();
-        System.out.println("Number of credits: ");
-        int nrCredits = scanner.nextInt();
-        student.setId(IdStudent);
-        student.setFirstName(firstName);
-        student.setLastName(lastName);
-        student.setTotalCredits(nrCredits);
-        List<Course> coursesStudent = new ArrayList<Course>();
-        student = new Student(IdStudent, nrCredits, coursesStudent, firstName, lastName);
+        studentController.setStudentId(IdStudent);
+        studentController.setStudentFirstName(firstName);
+        studentController.setStudentLastName(lastName);
+        //List<Course> coursesStudent = new ArrayList<Course>();
+        //studentController.setStudentEnrolledCourses(coursesStudent);
 
-        return student;
+        //return student;
     }
 
     public void run() {
@@ -71,16 +68,19 @@ public class Console {
                         System.out.println("Id: ");
                         Long IdStudent = scanner.nextLong();
                         List<Student> allStudents = (List<Student>) regsys.getStudentRepository().findAll();
-                        for (Student stud : allStudents) {
-                            if (stud.getId().equals(IdStudent)) {
-                                student = stud; //stud(eC: bd, sda)
-                            } else {
-                                student = getStudentData(student.getId());
+                        if (allStudents.size() == 0) {
+                            getStudentData(IdStudent);
+                        }
+                        else {
+                            for (Student stud : allStudents) {
+                                if (stud.getId().equals(IdStudent)) {
+                                    student = stud; //stud(eC: bd, sda)
+                                } else {
+                                    getStudentData(IdStudent);
+                                }
                             }
                         }
-                        if (allStudents.size() == 0) {
-                            student = getStudentData(student.getId());
-                        }
+
                         System.out.println("Info about Course");
                         System.out.println("Id: ");
                         Long IdCourse = scanner.nextLong();
