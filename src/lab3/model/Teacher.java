@@ -1,11 +1,13 @@
 package lab3.model;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Teacher extends Person{
 
     private Long teacherID;
-    private List<Course> courses;
+    private List<Course> courses = new ArrayList<>(Arrays.asList());
 
     public Teacher() {
         super();
