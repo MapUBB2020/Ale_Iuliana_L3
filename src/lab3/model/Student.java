@@ -1,20 +1,20 @@
 package lab3.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Student extends Person{
     private Long studentId;
-    private int totalCredits;
-    private List<Course> enrolledCourses;
+    private int totalCredits = 0;
+    private List<Course> enrolledCourses = new ArrayList<Course>();;
 
     public Student(){
         super();
     }
-    public Student(Long studentId, int totalCredits, List<Course> enrolledCourses, String firstName, String lastName) {
+    public Student(Long studentId, String firstName, String lastName) {
         super(firstName,lastName);
         this.studentId = studentId;
-        this.totalCredits = totalCredits;
-        this.enrolledCourses = enrolledCourses;
+        //this.enrolledCourses = enrolledCourses;
     }
 
     public Long getId() {
