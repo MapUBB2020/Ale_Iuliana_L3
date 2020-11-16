@@ -104,9 +104,7 @@ public class RegistrationSystem {
                 course = newCourse;
             }
         }
-        List<Course> teacherCourses = teacher.getCourses();
-        teacherCourses.remove(course);
-        teacher.setCourses(teacherCourses);
+        teacher.getCourses().remove(course);
         teacherRepository.update(teacher);
         for (Student stud: course.getStudentsEnrolled()) {
             stud.setTotalCredits(stud.getTotalCredits() - course.getCredits());
