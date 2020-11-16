@@ -9,8 +9,8 @@ import java.util.Arrays;
 import java.util.List;
 
 public class TeacherRepository implements ICrudRepository<Teacher>{
-    List<Teacher> teachers = Arrays.asList(new Teacher(new ArrayList<Course>(), (long) 1, "Catalin", "Rusu"),
-            new Teacher(new ArrayList<Course>(), (long) 2, "Diana", "Troanca"));
+    List<Teacher> teachers = Arrays.asList(new Teacher(new ArrayList<>(Arrays.asList(new Course((long) 1, "BD", new Teacher(new ArrayList<Course>(), (long) 2, "Diana", "Troanca"), 30, new ArrayList<Student>(),6))), (long) 1, "Catalin", "Rusu"),
+            new Teacher(new ArrayList<>(Arrays.asList(new Course((long) 1, "BD", new Teacher(new ArrayList<Course>(), (long) 2, "Diana", "Troanca"), 30, new ArrayList<Student>(),6))), (long) 1, "Diana", "Troanca"));
 
     @Override
     public Teacher findOne(Long id) {
