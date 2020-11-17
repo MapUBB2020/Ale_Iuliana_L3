@@ -6,23 +6,33 @@ import lab3.model.Teacher;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 public class TeacherRepository implements ICrudRepository<Teacher>{
-    List<Teacher> teachers = Arrays.asList(
+
+    /**
+     * Create a list of teachers which contains 2 teachers
+     */
+    public List<Teacher> teachers = Arrays.asList(
             new Teacher(
-                    new ArrayList<>(Arrays.asList(
+                    new ArrayList<Course>(Arrays.asList(
                             new Course((long) 2, "MAP", new Teacher(new ArrayList<Course>(), (long) 2, "Catalin", "Rusu"), 30, new ArrayList<Student>(),6))),
-                    (long) 1,
+                    (long) 2,
                     "Catalin",
                     "Rusu"),
             new Teacher(
-                    new ArrayList<>(Arrays.asList(
-                            new Course((long) 1, "BD", new Teacher(new ArrayList<Course>(), (long) 2, "Diana", "Troanca"), 30, new ArrayList<Student>(),6))),
-                    (long) 2,
+                    new ArrayList<Course>(Arrays.asList(
+                            new Course((long) 1, "BD", new Teacher(new ArrayList<Course>(), (long) 1, "Diana", "Troanca"), 30, new ArrayList<Student>(),6))),
+                    (long) 1,
                     "Diana",
                     "Troanca"));
 
+    /**
+     *
+     * @param id -the id of the teacher to be returned id must not be null
+     * @return the teacher object if it exists in the list, null otherwise
+     */
     @Override
     public Teacher findOne(Long id) {
         for (Teacher teacher: teachers) {
@@ -32,29 +42,53 @@ public class TeacherRepository implements ICrudRepository<Teacher>{
         return null;
     }
 
+    /**
+     *
+     * @return the list with all teachers
+     */
     @Override
     public Iterable<Teacher> findAll() {
         return teachers;
     }
 
+    /**
+     *
+     * @param entity teacher must be not null
+     * @return null if the entity teacher is saved, otherwise returns the entity (id already exists)
+     */
     @Override
     public Teacher save(Teacher entity) {
-        for (Teacher teacher: teachers) {
-            if (teacher.getID() == entity.getID())
-                return null;
+        if (findOne(entity.getID()) != null) {
+            return entity;
         }
-        return entity;
-    }
-
-    @Override
-    public Teacher delete(Long id) {
-        for (Teacher teacher: teachers) {
-            if (teacher.getID() == id)
-                return teacher;
+        else {
+            teachers.add(entity);
         }
         return null;
     }
 
+    /**
+     *
+     * @param id id must be not null
+     * @return the removed teacher if the teacher with the given id exists, null otherwise
+     */
+    @Override
+    public Teacher delete(Long id) {
+        if (id != null){
+            Teacher teacher = findOne(id);
+            if (teacher != null) {
+                teachers.remove(teacher);
+                return teacher;
+            }
+        }
+        return null;
+    }
+
+    /**
+     *
+     * @param entity teacher must not be null
+     * @return null if the teacher is updated, otherwise return the teacher entity
+     */
     @Override
     public Teacher update(Teacher entity) {
         for (Teacher teacher: teachers) {
