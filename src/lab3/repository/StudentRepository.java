@@ -8,7 +8,10 @@ import java.util.List;
 
 public class StudentRepository implements ICrudRepository<Student>{
 
-    List<Student> students = new ArrayList<>();
+    /**
+     * Create a list for the students
+     */
+    public List<Student> students = new ArrayList<Student>();
 
     /**
      *  @return the student with the specified id or null - if there is no student with the given id
@@ -16,7 +19,7 @@ public class StudentRepository implements ICrudRepository<Student>{
     @Override
     public Student findOne(Long id) {
         for (Student stud: students) {
-            if (stud.getId() == id)
+            if (stud.getId().equals(id))
                 return stud;
         }
         return null;
@@ -40,11 +43,13 @@ public class StudentRepository implements ICrudRepository<Student>{
      */
     @Override
     public Student save(Student entity) {
-        for (Student stud: students) {
-            if (stud.getId() == entity.getId() && stud.getTotalCredits() == entity.getTotalCredits())
-                return null;
+        if (findOne(entity.getId()) != null) {
+            return entity;
         }
-        return entity;
+        else {
+            students.add(entity);
+        }
+        return null;
     }
 
     /**
@@ -55,8 +60,10 @@ public class StudentRepository implements ICrudRepository<Student>{
     @Override
     public Student delete(Long id) {
         for (Student stud: students) {
-            if (stud.getId() == id)
+            if (stud.getId() == id){
+                students.remove(stud);
                 return stud;
+            }
         }
         return null;
     }
@@ -69,11 +76,11 @@ public class StudentRepository implements ICrudRepository<Student>{
     @Override
     public Student update(Student entity){
         for (Student stud: students) {
-            if (stud.getId() == entity.getId()){
+            if (stud.getId().equals(entity.getId())){
                 stud.setFirstName(entity.getFirstName());
                 stud.setLastName(entity.getLastName());
-                stud.setTotalCredits(entity.getTotalCredits());
-                stud.setEnrolledCourses(entity.getEnrolledCourses());
+                //stud.setTotalCredits(entity.getTotalCredits());
+                //stud.setEnrolledCourses(entity.getEnrolledCourses());
                 return null;
             }
         }
