@@ -14,7 +14,7 @@ public class TeacherRepository implements ICrudRepository<Teacher>{
     /**
      * Create a list of teachers which contains 2 teachers
      */
-    public List<Teacher> teachers = Arrays.asList(
+    public List<Teacher> teachers = new ArrayList<Teacher> (Arrays.asList(
             new Teacher(
                     new ArrayList<Course>(Arrays.asList(
                             new Course((long) 2, "MAP", new Teacher(new ArrayList<Course>(), (long) 2, "Catalin", "Rusu"), 30, new ArrayList<Student>(),6))),
@@ -26,7 +26,7 @@ public class TeacherRepository implements ICrudRepository<Teacher>{
                             new Course((long) 1, "BD", new Teacher(new ArrayList<Course>(), (long) 1, "Diana", "Troanca"), 30, new ArrayList<Student>(),6))),
                     (long) 1,
                     "Diana",
-                    "Troanca"));
+                    "Troanca")));
 
     /**
      *
