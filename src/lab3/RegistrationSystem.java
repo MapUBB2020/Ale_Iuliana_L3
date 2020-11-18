@@ -70,6 +70,11 @@ public class RegistrationSystem {
         return false;
     }
 
+    /**
+     *
+     * @return a list with the courses with free places (which have the size of the studentsEnrolled list smaller than the maximum capacity
+     * of enrollment)
+     */
     public List<Course> retrieveCoursesWithFreePlaces() {
         List<Course> coursesWithFreePlaces = new ArrayList<Course>();
         for (Course course : courseRepository.findAll())
@@ -79,10 +84,20 @@ public class RegistrationSystem {
     }
     //cand afisez o sa fac un for si afisez pt fiecare curs numarul de locuri libere
 
+    /**
+     *
+     * @return all available courses
+     */
     public List<Course> getAllCourses() {
         return courseRepository.findAll();
     }
 
+    /**
+     *
+     * @param id for a course
+     * @return the students enrolled for the course with a given id
+     * searches through the list of all courses and when the course with the given id is found, returns the list with enrolled students
+     */
     public List<Student> retrieveStudentsEnrolledForACourse(Long id) {
         Course course = new Course();
         for (Course newCourse: courseRepository.findAll()) {
