@@ -23,6 +23,7 @@ public class RegistrationSystem {
         this.teacherRepository = teacherRepository;
     }
 
+
     public CourseRepository getCourseRepository() {
         return courseRepository;
     }
@@ -35,6 +36,12 @@ public class RegistrationSystem {
         return teacherRepository;
     }
 
+    /**
+     *Registers a given student to a given course.
+     * @param id the id of the course to which the student registers
+     * @param student the student to be registered
+     * @return true if student is registered, false if not
+     */
     public boolean register(Long id, Student student) {
         Course course = new Course();
         for (Course newCourse: courseRepository.findAll()) {
@@ -108,6 +115,11 @@ public class RegistrationSystem {
         return course.getStudentsEnrolled();
     }
 
+    /**
+     * Deletes a given course for a given teacher
+     * @param idTeacher id of the Teacher who wants to delete the course
+     * @param idCourse the id of the course to be deleted
+     */
     public void deleteCourse(Long idTeacher, Long idCourse) {
         Teacher teacher = new Teacher();
         for (Teacher newTeacher: teacherRepository.findAll()) {
