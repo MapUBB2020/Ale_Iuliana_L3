@@ -16,19 +16,6 @@ public class TeacherRepositoryTest {
 
     @Test
     public void TestTeacherRepository(){
-        Student s1 = new Student((long)1, "Alexandra", "Negru");
-        Student s2 = new Student((long)2, "Iuliana", "Popa");
-        Student s3 = new Student((long)3, "Aaa", "Bbb");
-        Student s4 = new Student((long)4, "Ccc", "Ddd");
-        List<Student> enrolledStudents = new ArrayList<Student>(Arrays.asList(s1,s2,s3,s4));
-
-        Course c3 = new Course((long)3, "WS" , new Teacher(new ArrayList<Course>(), (long) 3, "Hannelore", "Lisei"), 32, enrolledStudents, 6);
-        Course c4 = new Course((long)4, "Programare logica" , new Teacher(new ArrayList<Course>(), (long) 4, "Christian", "Sacarea"), 32, enrolledStudents, 5);
-        List<Course> courseList = new ArrayList<>(Arrays.asList(c3,c4));
-
-        //Teacher t3 = new Teacher(courseList, (long) 3, "Hannelore", "Lisei");
-        //Teacher t4 = new Teacher(courseList, (long) 4, "Christian", "Sacarea");
-        //List<Teacher> teacherList = new ArrayList<Teacher>(Arrays.asList(t1,t2));
 
         Teacher t3 = new Teacher(
                 new ArrayList<Course>(Arrays.asList(
@@ -36,10 +23,47 @@ public class TeacherRepositoryTest {
                 (long) 3,
                 "Hannelore",
                 "Lisei");
+        Teacher t4 = new Teacher(
+                new ArrayList<Course>(Arrays.asList(
+                        new Course((long) 4, "Programare logica", new Teacher(new ArrayList<>(), (long) 3, "Christian", "Sacarea"), 30, new ArrayList<>(),6))),
+                (long) 4,
+                "Christian",
+                "Sacarea");
+
         teacherRepository.save(t3);
-        //teacherRepository.save(t4);
+        teacherRepository.save(t4);
 
         Assert.assertEquals(teacherRepository.teachers.get(2).firstName, "Hannelore");
+        Assert.assertEquals(teacherRepository.teachers.get(2).getCourses().get(0).getName(), "WS");
+        Assert.assertEquals(teacherRepository.teachers.get(3).firstName, "Christian");
+        Assert.assertEquals(teacherRepository.teachers.get(3).getCourses().get(0).getName(), "Programare logica");
+
+        Assert.assertNull(teacherRepository.findOne((long)5));
+        Assert.assertEquals(teacherRepository.findOne((long)3).lastName, "Lisei");
+        Assert.assertEquals(teacherRepository.findOne((long)4).lastName, "Sacarea");
+
+        List<Teacher> teacherList = new ArrayList<Teacher>(Arrays.asList(t3,t4));
+        //not equal fiindca mai am 2 profesori inserati in repo
+        Assert.assertNotEquals(teacherRepository.findAll(),teacherList);
+
+        Assert.assertEquals(teacherRepository.save(t3),t3);
+        Assert.assertEquals(teacherRepository.save(t4),t4);
+        Teacher t5 = new Teacher(
+                new ArrayList<Course>(Arrays.asList(
+                        new Course((long) 5, "A", new Teacher(new ArrayList<>(), (long) 3, "Aaa", "Bbb"), 30, new ArrayList<>(),6))),
+                (long) 5,
+                "Aaa",
+                "Bbb");
+        Assert.assertNull(teacherRepository.save(t5));
+
+        teacherRepository.delete((long)5);
+
+        Assert.assertNull(teacherRepository.delete(t5.getID()));
+        Assert.assertEquals(teacherRepository.delete(t3.getID()),t3);
+
+        Assert.assertNull(teacherRepository.update(t4));
+        Assert.assertNotNull(teacherRepository.update(t5));
+        Assert.assertEquals(teacherRepository.update(t5).lastName,"Bbb");
 
     }
 }
