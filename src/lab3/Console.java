@@ -41,6 +41,9 @@ public class Console {
         //return student;
     }
 
+    /**
+     * The menu for the application
+     */
     public void run() {
         boolean run = true;
         while (run) {
