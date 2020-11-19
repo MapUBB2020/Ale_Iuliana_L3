@@ -43,8 +43,10 @@ public class CourseRepository implements ICrudRepository<Course>{
     public Course delete(Long id) {
         if (id != null){
             Course entity = findOne(id);
-            if (entity != null)
+            if (entity != null) {
                 courseRepo.remove(entity);
+                return entity;
+            }
         }
         return null;
     }
