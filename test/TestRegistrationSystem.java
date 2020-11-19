@@ -70,6 +70,13 @@ public class TestRegistrationSystem {
         Assert.assertNotEquals(regSys.retrieveStudentsEnrolledForACourse((long)3).get(0),s3);
         Assert.assertNotEquals(regSys.retrieveStudentsEnrolledForACourse((long)3).get(1),s1);
 
+        //Test register
+
+        Assert.assertTrue(regSys.register((long) 1, s1));
+        Assert.assertTrue(regSys.register((long) 1, s2));
+        Assert.assertTrue(regSys.register((long) 1, s3));
+        s1.setTotalCredits(30);
+        Assert.assertFalse(regSys.register((long) 1, s1));
     }
 
 
