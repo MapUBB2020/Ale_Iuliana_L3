@@ -10,7 +10,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class CourseRepository implements ICrudRepository<Course>{
-    List<Course> courseRepo = new ArrayList<>(Arrays.asList(
+    public List<Course> courseRepo = new ArrayList<>(Arrays.asList(
             new Course((long) 1, "BD", new Teacher(new ArrayList<Course>(), (long) 1, "Diana", "Troanca"), 30, new ArrayList<Student>(),6),
             new Course((long) 2, "MAP", new Teacher(new ArrayList<Course>(), (long) 2, "Catalin", "Rusu"), 30, new ArrayList<Student>(),6)));
 
