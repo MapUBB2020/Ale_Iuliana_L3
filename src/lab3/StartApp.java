@@ -1,6 +1,7 @@
 package lab3;
 
 import JSONParser.CourseDataReader;
+import JSONParser.StudentDataWriter;
 import JSONParser.TeacherDataReader;
 import lab3.model.Teacher;
 import lab3.repository.CourseRepository;
@@ -32,11 +33,13 @@ public class StartApp {
         teacherRepository.initialise();
         courseRepository.initialise();
 
+
         RegistrationSystem registrationSystem = new RegistrationSystem(courseRepository,
                 studentRepository,
                 teacherRepository);
 
         Console console = new Console(registrationSystem);
         console.run();
+        studentRepository.writeToJson();
     }
 }
