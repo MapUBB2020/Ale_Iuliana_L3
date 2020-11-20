@@ -1,32 +1,44 @@
 package lab3.repository;
 
+import JSONParser.TeacherDataReader;
 import lab3.model.Course;
 import lab3.model.Student;
 import lab3.model.Teacher;
 
+import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
-public class TeacherRepository implements ICrudRepository<Teacher>{
+public class TeacherRepository implements ICrudRepository<Teacher> {
 
-    /**
-     * Create a list of teachers which contains 2 teachers
-     */
-    public List<Teacher> teachers = new ArrayList<Teacher> (Arrays.asList(
-            new Teacher(
-                    new ArrayList<Course>(Arrays.asList(
-                            new Course((long) 2, "MAP", new Teacher(new ArrayList<Course>(), (long) 2, "Catalin", "Rusu"), 30, new ArrayList<Student>(),6))),
-                    (long) 2,
-                    "Catalin",
-                    "Rusu"),
-            new Teacher(
-                    new ArrayList<Course>(Arrays.asList(
-                            new Course((long) 1, "BD", new Teacher(new ArrayList<Course>(), (long) 1, "Diana", "Troanca"), 30, new ArrayList<Student>(),6))),
-                    (long) 1,
-                    "Diana",
-                    "Troanca")));
+//
+//    public List<Teacher> teachers = new ArrayList<Teacher> (Arrays.asList(
+//            new Teacher(
+//                    new ArrayList<Course>(Arrays.asList(
+//                            new Course((long) 2, "MAP", new Teacher(new ArrayList<Course>(), (long) 2, "Catalin", "Rusu"), 30, new ArrayList<Student>(),6))),
+//                    (long) 2,
+//                    "Catalin",
+//                    "Rusu"),
+//            new Teacher(
+//                    new ArrayList<Course>(Arrays.asList(
+//                            new Course((long) 1, "BD", new Teacher(new ArrayList<Course>(), (long) 1, "Diana", "Troanca"), 30, new ArrayList<Student>(),6))),
+//                    (long) 1,
+//                    "Diana",
+//                    "Troanca")));
+//
+//
+//
+
+    TeacherDataReader<Teacher> teacherDataReader = new TeacherDataReader<Teacher>();
+    public List<Teacher> teachers = new ArrayList<Teacher>();
+
+    public void initialise() throws IOException, ParseException {
+        teachers = teacherDataReader.initialiseData();
+    }
+
 
     /**
      *
