@@ -1,9 +1,14 @@
 package lab3.repository;
 
+import java.io.IOException;
+import java.text.ParseException;
+
 /**
  * CRUD operations repository interface
  */
 public interface ICrudRepository<E> {
+
+    void initialise() throws IOException, ParseException;
 
     /**
      * @param id -the id of the entity to be returned id must not be null
