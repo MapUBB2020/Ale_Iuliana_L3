@@ -32,7 +32,7 @@ public class TeacherRepository implements ICrudRepository<Teacher> {
 //
 //
 
-    TeacherDataReader<Teacher> teacherDataReader = new TeacherDataReader<Teacher>();
+    TeacherDataReader teacherDataReader = new TeacherDataReader();
     public List<Teacher> teachers = new ArrayList<Teacher>();
 
     public void initialise() throws IOException, ParseException {
