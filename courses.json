@@ -1,0 +1,28 @@
+[
+  {
+    "id": 1,
+    "name": "BD",
+    "teacher": {
+      "teacherID": 1,
+      "courses": [],
+      "firstName": "Diana",
+      "lastName": "Troanca"
+    },
+    "maxEnrollment": 30,
+    "studentsEnrolled": [],
+    "credits": 6
+  },
+  {
+    "id": 2,
+    "name": "MAP",
+    "teacher": {
+      "teacherID": 2,
+      "courses": [],
+      "firstName": "Catalin",
+      "lastName": "Rusu"
+    },
+    "maxEnrollment": 30,
+    "studentsEnrolled": [],
+    "credits": 6
+  }
+]
