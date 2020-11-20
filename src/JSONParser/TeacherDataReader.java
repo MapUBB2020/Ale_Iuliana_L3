@@ -15,9 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.io.Reader;
 
-public class TeacherDataReader<Teacher> implements DataReader<Teacher> {
-
-    @Override
+public class TeacherDataReader {
     public List<Teacher> initialiseData() throws IOException, ParseException {
         TeacherRepository teacherRepository = new TeacherRepository();
 
@@ -28,7 +26,6 @@ public class TeacherDataReader<Teacher> implements DataReader<Teacher> {
         try (Reader reader = Files.newBufferedReader(path)) {
             teachersFromJson = gson.fromJson(reader,
                     new TypeToken<List<Teacher>>(){}.getType());
-            teachersFromJson.forEach(System.out::println);
         }
         return teachersFromJson;
     }
