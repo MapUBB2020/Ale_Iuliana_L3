@@ -17,7 +17,7 @@ import java.text.ParseException;
 import java.util.List;
 import java.io.Reader;
 
-public class TeacherReader<Teacher> implements DataReader<Teacher> {
+public class TeacherDataReader<Teacher> implements DataReader<Teacher> {
 
     @Override
     public List<Teacher> initialiseData() throws IOException, ParseException {
