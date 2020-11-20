@@ -1,8 +1,11 @@
 package lab3.repository;
 
+import JSONParser.StudentDataReader;
 import lab3.model.Course;
 import lab3.model.Student;
 
+import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,8 +13,15 @@ public class StudentRepository implements ICrudRepository<Student>{
 
     /**
      * Create a list for the students
+     * Create an object studentDataReader to read from json
      */
     public List<Student> students = new ArrayList<Student>();
+    StudentDataReader studentDataReader = new StudentDataReader();
+
+    @Override
+    public void initialise() throws IOException, ParseException {
+        students = studentDataReader.initialiseData();
+    }
 
     /**
      *  @return the student with the specified id or null - if there is no student with the given id
