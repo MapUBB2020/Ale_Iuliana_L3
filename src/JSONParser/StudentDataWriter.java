@@ -15,16 +15,11 @@ import java.nio.file.Paths;
 import java.util.List;
 
 public class StudentDataWriter {
-    public void writeData(List<Student> students) throws IOException {
-
-        students.forEach(System.out::println);
+    public void writeData(List<StudentId> students) throws IOException {
         Path path = Paths.get("students.json");
         try (Writer writer = Files.newBufferedWriter(path,  StandardCharsets.UTF_8)) {
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
             gson.toJson(students, writer);
         }
-        System.out.println(students.get(0));
-
-
     }
 }
