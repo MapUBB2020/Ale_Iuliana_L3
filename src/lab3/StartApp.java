@@ -40,6 +40,6 @@ public class StartApp {
 
         Console console = new Console(registrationSystem);
         console.run();
-        studentRepository.writeToJson();
+        registrationSystem.writeToJson();
     }
 }
