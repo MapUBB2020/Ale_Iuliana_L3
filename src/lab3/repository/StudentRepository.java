@@ -18,15 +18,10 @@ public class StudentRepository implements ICrudRepository<Student>{
      */
     public List<Student> students = new ArrayList<Student>();
     StudentDataReader studentDataReader = new StudentDataReader();
-    StudentDataWriter studentDataWriter = new StudentDataWriter();
 
     @Override
     public void initialise() throws IOException, ParseException {
         students = studentDataReader.initialiseData();
-    }
-
-    public void writeToJson() throws IOException {
-        studentDataWriter.writeData();
     }
 
     /**
