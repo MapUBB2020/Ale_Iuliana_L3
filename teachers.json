@@ -1,11 +1,17 @@
 [
   {
     "teacherID": 2,
+    "courses": [
+      2
+    ],
     "firstName": "Catalin",
     "lastName": "Rusu"
   },
   {
     "teacherID": 1,
+    "courses": [
+      1
+    ],
     "firstName": "Diana",
     "lastName": "Troanca"
   }
