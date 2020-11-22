@@ -1,19 +1,26 @@
 package lab3;
 
+import JSONParser.StudentDataWriter;
 import lab3.model.Course;
+import lab3.model.Person;
 import lab3.model.Student;
 import lab3.model.Teacher;
 import lab3.repository.CourseRepository;
 import lab3.repository.StudentRepository;
 import lab3.repository.TeacherRepository;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class RegistrationSystem {
     private CourseRepository courseRepository;
     private StudentRepository studentRepository;
     private TeacherRepository teacherRepository;
+    StudentDataWriter studentDataWriter = new StudentDataWriter();
 
     public RegistrationSystem(CourseRepository courseRepository,
                               StudentRepository studentRepository,
@@ -34,6 +41,10 @@ public class RegistrationSystem {
 
     public TeacherRepository getTeacherRepository() {
         return teacherRepository;
+    }
+
+    public void writeToJson() throws IOException {
+        studentDataWriter.writeData(studentRepository.students);
     }
 
     /**
@@ -145,5 +156,19 @@ public class RegistrationSystem {
             }
         }
         courseRepository.delete(course.getId());
+    }
+
+    public List<Course> sortByCredits() {
+        List<Course> sortedCourses = courseRepository.findAll();
+        sortedCourses.sort((course1, course2) -> course1.getCredits() - course2.getCredits());
+        return sortedCourses;
+    }
+
+    public List<Course> filterByTeacher(Person teacher) {
+        List<Course> courseRepo = courseRepository.findAll();
+        return courseRepo.stream()
+                .filter(course -> course.getTeacher().firstName.equals(teacher.getFirstName()))
+                .filter(course -> course.getTeacher().lastName.equals(teacher.getLastName()))
+                .collect(Collectors.toList());
     }
 }
