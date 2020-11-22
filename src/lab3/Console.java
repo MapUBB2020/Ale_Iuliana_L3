@@ -4,6 +4,7 @@ import lab3.controller.CourseController;
 import lab3.controller.StudentController;
 import lab3.controller.TeacherController;
 import lab3.model.Course;
+import lab3.model.Person;
 import lab3.model.Student;
 import lab3.model.Teacher;
 import lab3.view.CourseView;
@@ -54,6 +55,8 @@ public class Console {
             System.out.println("3.Show students who enrolled to a specific course.");
             System.out.println("4.Show all courses.");
             System.out.println("5.Delete a course for a teacher and the students enrolled.");
+            System.out.println("6.Filter courses by teacher.");
+            System.out.println("7.Sort courses by number of credits.");
             try {
                 Scanner scanner = new Scanner(System.in);
                 System.out.println("Choose option:");
@@ -91,7 +94,7 @@ public class Console {
                         regsys.register(IdCourse, student);
                         break;
                     }
-                    case 2:
+                    case 2: {
 
                         List<Course> list = regsys.retrieveCoursesWithFreePlaces();
                         for (Course course : list) {
@@ -99,19 +102,21 @@ public class Console {
                             System.out.println(course.getName() + " : " + nrCredits);
                         }
                         break;
-                    case 3:
+                    }
+                    case 3: {
                         System.out.println("Course details");
                         System.out.println("Id: ");
                         Long courseId = scanner.nextLong();
                         List<Student> students = regsys.retrieveStudentsEnrolledForACourse(courseId);
-                        for (Student student: students) {
+                        for (Student student : students) {
                             System.out.println(student.getFirstName());
                             System.out.println(student.getLastName());
                         }
                         break;
-                    case 4:
+                    }
+                    case 4: {
                         List<Course> allCourses = regsys.getAllCourses();
-                        for (Course course: allCourses) {
+                        for (Course course : allCourses) {
                             CourseView courseView = new CourseView();
                             courseController = new CourseController(course, courseView);
                             courseView.printCourseDetails(courseController.getCourseName(),
@@ -123,13 +128,48 @@ public class Console {
                         }
                         //System.out.println(regsys.getAllCourses());
                         break;
-                    case 5:
+                    }
+                    case 5: {
                         System.out.println("Teacher Id: ");
                         Long teacherId = scanner.nextLong();
                         System.out.println("Course Id: ");
                         Long courseIdNew = scanner.nextLong();
                         regsys.deleteCourse(teacherId, courseIdNew);
                         break;
+                    }
+                    case 6: {
+                        System.out.println("First Name of teacher: ");
+                        String firstName = scanner.nextLine();
+                        System.out.println("Last Name of teacher:");
+                        String lastName = scanner.nextLine();
+                        Person teacher = new Person(firstName, lastName);
+                        List<Course> sortedCourses = regsys.filterByTeacher(teacher);
+                        for (Course course : sortedCourses) {
+                            CourseView courseView = new CourseView();
+                            courseController = new CourseController(course, courseView);
+                            courseView.printCourseDetails(courseController.getCourseName(),
+                                    courseController.getCourseTeacher(),
+                                    courseController.getCourseMaxEnrollment(),
+                                    courseController.getCourseStudentsEnrolled(),
+                                    courseController.getCourseCredits()
+                            );
+                        }
+                        break;
+                    }
+                    case 7: {
+                        List<Course> filteredCourses = regsys.sortByCredits();
+                        for (Course course : filteredCourses) {
+                            CourseView courseView = new CourseView();
+                            courseController = new CourseController(course, courseView);
+                            courseView.printCourseDetails(courseController.getCourseName(),
+                                    courseController.getCourseTeacher(),
+                                    courseController.getCourseMaxEnrollment(),
+                                    courseController.getCourseStudentsEnrolled(),
+                                    courseController.getCourseCredits()
+                            );
+                        }
+                        break;
+                    }
                     default:
                         System.out.println("Option doesn't exist. Choose another.");
                         break;
