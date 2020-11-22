@@ -58,6 +58,26 @@ public class StudentRepository implements ICrudRepository<Student>{
         return students;
     }
 
+    public List<StudentId> changeToStudentId() {
+        List<StudentId> studentsId = new ArrayList<>();
+
+        for (Student student: students) {
+            StudentId studentId = new StudentId();
+            studentId.setId(student.getId());
+            studentId.setFirstName(student.getFirstName());
+            studentId.setLastName(student.getLastName());
+            studentId.setTotalCredits(student.getTotalCredits());
+            List<Long> coursesId = new ArrayList<>();
+            for (Course course: student.getEnrolledCourses()) {
+                coursesId.add(course.getId());
+            }
+            studentId.setEnrolledCourses(coursesId);
+            studentsId.add(studentId);
+        }
+        return studentsId;
+    }
+
+
     /**
      *  @return the student with the specified id or null - if there is no student with the given id
      *  */

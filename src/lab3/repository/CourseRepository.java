@@ -54,6 +54,14 @@ public class CourseRepository implements ICrudRepository<Course>{
         return courses;
     }
 
+    public void setRelations(StudentRepository studentRepository) {
+        for (Student student: studentRepository.findAll()) {
+            for (Course course: student.getEnrolledCourses()) {
+                findOne(course.getId()).getStudentsEnrolled().add(student);
+            }
+        }
+    }
+
     @Override
     public Course findOne(Long id) {
         for(Course course: courseRepo)

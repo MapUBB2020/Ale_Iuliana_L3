@@ -54,6 +54,30 @@ public class TeacherRepository implements ICrudRepository<Teacher> {
         return teachers;
     }
 
+    public List<TeacherId> changeToTeacherId() {
+        List<TeacherId> teachersId = new ArrayList<>();
+
+        for (Teacher teacher: teachers) {
+            TeacherId teacherId = new TeacherId();
+            teacherId.setID(teacher.getID());
+            teacherId.setFirstName(teacher.getFirstName());
+            teacherId.setLastName(teacher.getLastName());
+            List<Long> coursesId = new ArrayList<>();
+            for (Course course: teacher.getCourses()) {
+                coursesId.add(course.getId());
+            }
+            teacherId.setCourses(coursesId);
+            teachersId.add(teacherId);
+        }
+        return teachersId;
+    }
+
+    public void setRelations(CourseRepository courseRepository) {
+        for (Course course: courseRepository.findAll()) {
+            findOne(course.getTeacher().getID()).getCourses().add(course);
+        }
+    }
+
     /**
      *
      * @param id -the id of the teacher to be returned id must not be null
