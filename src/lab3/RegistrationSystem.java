@@ -1,5 +1,6 @@
 package lab3;
 
+import Exceptions.IncorrectFileNameException;
 import JSONParser.StudentDataWriter;
 import JSONParser.StudentId;
 import JSONParser.TeacherDataWriter;
@@ -47,7 +48,7 @@ public class RegistrationSystem {
         return teacherRepository;
     }
 
-    public void writeToJson() throws IOException {
+    public void writeToJson() throws IOException, IncorrectFileNameException {
         List<TeacherId> teachersId = teacherRepository.changeToTeacherId();
         List<StudentId> studentsId = studentRepository.changeToStudentId();
         teacherDataWriter.writeData(teachersId);
