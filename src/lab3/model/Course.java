@@ -1,5 +1,6 @@
 package lab3.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Course {
@@ -7,7 +8,7 @@ public class Course {
     private String name;
     private Teacher teacher;
     private int maxEnrollment;
-    private List<Student> studentsEnrolled;
+    private List<Student> studentsEnrolled = new ArrayList<>();
     private int credits;
 
     public Course() {
