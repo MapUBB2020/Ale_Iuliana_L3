@@ -1,5 +1,6 @@
 package lab3;
 
+import Exceptions.IncorrectFileNameException;
 import JSONParser.CourseDataReader;
 import JSONParser.StudentDataWriter;
 import JSONParser.TeacherDataReader;
@@ -20,7 +21,7 @@ public class StartApp {
      * Start point of the application
      * @param args command line arguments
      */
-    public static void main(String[] args) throws IOException, ParseException, NullPointerException {
+    public static void main(String[] args) throws IOException, ParseException, NullPointerException, IncorrectFileNameException {
         TeacherRepository teacherRepository = new TeacherRepository();
 
         teacherRepository.initialise();
