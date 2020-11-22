@@ -1,5 +1,6 @@
 package lab3;
 
+import Exceptions.WrongInput;
 import lab3.controller.CourseController;
 import lab3.controller.StudentController;
 import lab3.controller.TeacherController;
@@ -12,6 +13,7 @@ import lab3.view.StudentView;
 import lab3.view.TeacherView;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -66,32 +68,40 @@ public class Console {
                         run = false;
                         break;
                     case 1: {
-                        System.out.println("Info about Student");
                         Student student = new Student();
                         StudentView studentView = new StudentView();
                         studentController = new StudentController(student, studentView);
+                        System.out.println("Info about Student");
 
-                        System.out.println("Id: ");
-                        Long IdStudent = scanner.nextLong();
-                        List<Student> allStudents = (List<Student>) regsys.getStudentRepository().findAll();
-                        if (allStudents.size() == 0) {
-                            getStudentData(IdStudent);
-                        }
-                        else {
-                            for (Student stud : allStudents) {
-                                if (stud.getId().equals(IdStudent)) {
-                                    student = stud; //stud(eC: bd, sda)
-                                } else {
-                                    getStudentData(IdStudent);
+                        try {
+                            System.out.println("Id: ");
+                            Long IdStudent = scanner.nextLong();
+
+                            List<Student> allStudents = (List<Student>) regsys.getStudentRepository().findAll();
+                            if (allStudents.size() == 0) {
+                                getStudentData(IdStudent);
+                            } else {
+                                for (Student stud : allStudents) {
+                                    if (stud.getId().equals(IdStudent)) {
+                                        student = stud; //stud(eC: bd, sda)
+                                    } else {
+                                        getStudentData(IdStudent);
+                                    }
                                 }
                             }
+                        } catch (InputMismatchException e) {
+                            throw new WrongInput("The student id should be of type long");
                         }
 
                         System.out.println("Info about Course");
-                        System.out.println("Id: ");
-                        Long IdCourse = scanner.nextLong();
+                        try {
+                            System.out.println("Id: ");
+                            Long IdCourse = scanner.nextLong();
+                            regsys.register(IdCourse, student);
+                        }catch (InputMismatchException e){
+                            throw new WrongInput("The course id should be of type long");
+                        }
 
-                        regsys.register(IdCourse, student);
                         break;
                     }
                     case 2: {
