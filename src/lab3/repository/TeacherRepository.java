@@ -1,5 +1,6 @@
 package lab3.repository;
 
+import Exceptions.IncorrectFileNameException;
 import JSONParser.CourseId;
 import JSONParser.TeacherDataReader;
 import JSONParser.TeacherId;
@@ -37,11 +38,11 @@ public class TeacherRepository implements ICrudRepository<Teacher> {
     TeacherDataReader teacherDataReader = new TeacherDataReader();
     public List<Teacher> teachers = new ArrayList<Teacher>();
 
-    public void initialise() throws IOException, ParseException {
+    public void initialise() throws IOException, ParseException, IncorrectFileNameException {
         teachers = changeTeacher();
     }
 
-    public List<Teacher> changeTeacher() throws IOException, ParseException {
+    public List<Teacher> changeTeacher() throws IOException, ParseException, IncorrectFileNameException {
         List<TeacherId> teachersId = teacherDataReader.initialiseData();
         List<Teacher> teachers = new ArrayList<>();
         for (TeacherId teacherId: teachersId) {

@@ -1,5 +1,6 @@
 package lab3.repository;
 
+import Exceptions.IncorrectFileNameException;
 import JSONParser.StudentDataReader;
 import JSONParser.StudentDataWriter;
 import JSONParser.StudentId;
@@ -31,11 +32,11 @@ public class StudentRepository implements ICrudRepository<Student>{
     }
 
     @Override
-    public void initialise() throws IOException, ParseException {
+    public void initialise() throws IOException, ParseException, IncorrectFileNameException {
         students = changeStudent();
     }
 
-    public List<Student> changeStudent() throws IOException, ParseException {
+    public List<Student> changeStudent() throws IOException, ParseException, IncorrectFileNameException {
         List<StudentId> studentsId = studentDataReader.initialiseData();
         List<Student> students = new ArrayList<>();
         for (StudentId studentId: studentsId) {

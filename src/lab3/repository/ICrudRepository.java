@@ -1,5 +1,7 @@
 package lab3.repository;
 
+import Exceptions.IncorrectFileNameException;
+
 import java.io.IOException;
 import java.text.ParseException;
 
@@ -8,7 +10,7 @@ import java.text.ParseException;
  */
 public interface ICrudRepository<E> {
 
-    void initialise() throws IOException, ParseException;
+    void initialise() throws IOException, ParseException, IncorrectFileNameException;
 
     /**
      * @param id -the id of the entity to be returned id must not be null
