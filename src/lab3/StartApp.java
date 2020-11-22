@@ -35,6 +35,9 @@ public class StartApp {
             System.out.println("No students");
         }
 
+        courseRepository.setRelations(studentRepository);
+        teacherRepository.setRelations(courseRepository);
+
         RegistrationSystem registrationSystem = new RegistrationSystem(courseRepository,
                 studentRepository,
                 teacherRepository);
