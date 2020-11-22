@@ -148,10 +148,11 @@ public class Console {
                         break;
                     }
                     case 6: {
+                        Scanner scanner1 = new Scanner(System.in);
                         System.out.println("First Name of teacher: ");
-                        String firstName = scanner.nextLine();
+                        String firstName = scanner1.nextLine();
                         System.out.println("Last Name of teacher:");
-                        String lastName = scanner.nextLine();
+                        String lastName = scanner1.nextLine();
                         Person teacher = new Person(firstName, lastName);
                         List<Course> sortedCourses = regsys.filterByTeacher(teacher);
                         for (Course course : sortedCourses) {
@@ -189,5 +190,4 @@ public class Console {
             }
         }
     }
-
 }
