@@ -3,6 +3,7 @@ package lab3.controller;
 import lab3.model.Course;
 import lab3.model.Person;
 import lab3.model.Student;
+import lab3.model.Teacher;
 import lab3.view.CourseView;
 
 import java.util.List;
@@ -32,11 +33,11 @@ public class CourseController {
         model.setName(name);
     }
 
-    public Person getCourseTeacher() {
+    public Teacher getCourseTeacher() {
         return model.getTeacher();
     }
 
-    public void setCourseTeacher(Person teacher) {
+    public void setCourseTeacher(Teacher teacher) {
         model.setTeacher(teacher);
     }
 

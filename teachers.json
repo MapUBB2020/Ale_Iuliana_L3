@@ -1,41 +1,11 @@
 [
   {
     "teacherID": 2,
-    "courses": [
-      {
-        "id": 2,
-        "name": "MAP",
-        "teacher": {
-          "teacherID": 2,
-          "courses": [],
-          "firstName": "Catalin",
-          "lastName": "Rusu"
-        },
-        "maxEnrollment": 30,
-        "studentsEnrolled": [],
-        "credits": 6
-      }
-    ],
     "firstName": "Catalin",
     "lastName": "Rusu"
   },
   {
     "teacherID": 1,
-    "courses": [
-      {
-        "id": 1,
-        "name": "BD",
-        "teacher": {
-          "teacherID": 1,
-          "courses": [],
-          "firstName": "Diana",
-          "lastName": "Troanca"
-        },
-        "maxEnrollment": 30,
-        "studentsEnrolled": [],
-        "credits": 6
-      }
-    ],
     "firstName": "Diana",
     "lastName": "Troanca"
   }

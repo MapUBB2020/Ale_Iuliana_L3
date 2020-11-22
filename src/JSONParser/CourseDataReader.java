@@ -17,14 +17,14 @@ import java.util.List;
 
 public class CourseDataReader {
 
-    public List<Course> initialiseData() throws IOException, ParseException {
+    public List<CourseId> initialiseData() throws IOException, ParseException {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
         Path path = Paths.get("courses.json");
-        List<Course> coursesFromJson;
+        List<CourseId> coursesFromJson;
         try (Reader reader = Files.newBufferedReader(path)) {
             coursesFromJson = gson.fromJson(reader,
-                    new TypeToken<List<Course>>(){}.getType());
+                    new TypeToken<List<CourseId>>(){}.getType());
         }
         return coursesFromJson;
     }

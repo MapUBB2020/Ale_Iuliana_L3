@@ -1,24 +1,25 @@
-package lab3.model;
+package JSONParser;
+
+import lab3.model.Person;
+import lab3.model.Student;
 
 import java.util.List;
 
-public class Course {
+public class CourseId {
     private Long id;
     private String name;
-    private Teacher teacher;
+    private Long teacherId;
     private int maxEnrollment;
-    private List<Student> studentsEnrolled;
     private int credits;
 
-    public Course() {
+    public CourseId() {
     }
 
-    public Course(Long id, String name, Teacher teacher, int maxEnrollment, List<Student> studentsEnrolled, int credits) {
+    public CourseId(Long id, String name, Long teacherId, int maxEnrollment, List<Long> studentsEnrolled, int credits) {
         this.id = id;
         this.name = name;
-        this.teacher = teacher;
+        this.teacherId = teacherId;
         this.maxEnrollment = maxEnrollment;
-        this.studentsEnrolled = studentsEnrolled;
         this.credits = credits;
     }
 
@@ -38,12 +39,12 @@ public class Course {
         this.name = name;
     }
 
-    public Teacher getTeacher() {
-        return teacher;
+    public Long getTeacher() {
+        return teacherId;
     }
 
-    public void setTeacher(Teacher teacher) {
-        this.teacher = teacher;
+    public void setTeacher(Long teacherId) {
+        this.teacherId = teacherId;
     }
 
     public int getMaxEnrollment() {
@@ -52,14 +53,6 @@ public class Course {
 
     public void setMaxEnrollment(int maxEnrollment) {
         this.maxEnrollment = maxEnrollment;
-    }
-
-    public List<Student> getStudentsEnrolled() {
-        return studentsEnrolled;
-    }
-
-    public void setStudentsEnrolled(List<Student> studentsEnrolled) {
-        this.studentsEnrolled = studentsEnrolled;
     }
 
     public int getCredits() {

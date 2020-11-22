@@ -21,18 +21,19 @@ public class StartApp {
      * @param args command line arguments
      */
     public static void main(String[] args) throws IOException, ParseException, NullPointerException {
-        StudentRepository studentRepository = new StudentRepository();
         TeacherRepository teacherRepository = new TeacherRepository();
-        CourseRepository courseRepository = new CourseRepository();
 
+        teacherRepository.initialise();
+
+        CourseRepository courseRepository = new CourseRepository(teacherRepository.teachers);
+        courseRepository.initialise();
+
+        StudentRepository studentRepository = new StudentRepository(courseRepository.courseRepo);
         try {
             studentRepository.initialise();
         } catch (Exception NullPointerException) {
             System.out.println("No students");
         }
-        teacherRepository.initialise();
-        courseRepository.initialise();
-
 
         RegistrationSystem registrationSystem = new RegistrationSystem(courseRepository,
                 studentRepository,

@@ -16,16 +16,16 @@ import java.util.List;
 import java.io.Reader;
 
 public class TeacherDataReader {
-    public List<Teacher> initialiseData() throws IOException, ParseException {
+    public List<TeacherId> initialiseData() throws IOException, ParseException {
         TeacherRepository teacherRepository = new TeacherRepository();
 
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
         Path path = Paths.get("teachers.json");
-        List<Teacher> teachersFromJson = new ArrayList<>();
+        List<TeacherId> teachersFromJson = new ArrayList<>();
         try (Reader reader = Files.newBufferedReader(path)) {
             teachersFromJson = gson.fromJson(reader,
-                    new TypeToken<List<Teacher>>(){}.getType());
+                    new TypeToken<List<TeacherId>>(){}.getType());
         }
         return teachersFromJson;
     }

@@ -1,6 +1,8 @@
 package lab3.repository;
 
 import JSONParser.CourseDataReader;
+import JSONParser.CourseId;
+import JSONParser.TeacherId;
 import lab3.model.Course;
 import lab3.model.Person;
 import lab3.model.Student;
@@ -19,10 +21,37 @@ public class CourseRepository implements ICrudRepository<Course>{
 
     CourseDataReader courseDataReader = new CourseDataReader();
     public List<Course> courseRepo = new ArrayList<>();
+    public List<Teacher> teacherRepo = new ArrayList<>();
+
+    public CourseRepository() {
+    }
+
+    public CourseRepository(List<Teacher> teacherRepo) {
+        this.teacherRepo = teacherRepo;
+    }
 
     @Override
     public void initialise() throws IOException, ParseException {
-        courseRepo = courseDataReader.initialiseData();
+        courseRepo = changeCourse();
+    }
+
+    public List<Course> changeCourse() throws IOException, ParseException {
+        List<CourseId> coursesId = courseDataReader.initialiseData();
+        List<Course> courses = new ArrayList<>();
+        for (CourseId courseId: coursesId) {
+            Course course = new Course();
+            course.setId(courseId.getId());
+            course.setName(courseId.getName());
+            for (Teacher teacher: teacherRepo) {
+                if (teacher.getID() == courseId.getTeacher()) {
+                    course.setTeacher(teacher);
+                }
+            }
+            course.setMaxEnrollment(courseId.getMaxEnrollment());
+            course.setCredits(courseId.getCredits());
+            courses.add(course);
+        }
+        return courses;
     }
 
     @Override

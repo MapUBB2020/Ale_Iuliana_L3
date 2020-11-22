@@ -2,8 +2,11 @@ package lab3.repository;
 
 import JSONParser.StudentDataReader;
 import JSONParser.StudentDataWriter;
+import JSONParser.StudentId;
+import JSONParser.TeacherId;
 import lab3.model.Course;
 import lab3.model.Student;
+import lab3.model.Teacher;
 
 import java.io.IOException;
 import java.text.ParseException;
@@ -18,10 +21,41 @@ public class StudentRepository implements ICrudRepository<Student>{
      */
     public List<Student> students = new ArrayList<Student>();
     StudentDataReader studentDataReader = new StudentDataReader();
+    public List<Course> courses = new ArrayList<>();
+
+    public StudentRepository() {
+    }
+
+    public StudentRepository(List<Course> courses) {
+        this.courses = courses;
+    }
 
     @Override
     public void initialise() throws IOException, ParseException {
-        students = studentDataReader.initialiseData();
+        students = changeStudent();
+    }
+
+    public List<Student> changeStudent() throws IOException, ParseException {
+        List<StudentId> studentsId = studentDataReader.initialiseData();
+        List<Student> students = new ArrayList<>();
+        for (StudentId studentId: studentsId) {
+            Student student = new Student();
+            student.setId(studentId.getId());
+            student.setFirstName(studentId.getFirstName());
+            student.setLastName(studentId.getLastName());
+            List<Course> coursesForStudent = new ArrayList<>();
+            for (Long courseId: studentId.getEnrolledCourses()) {
+                for (Course course: courses) {
+                    if (courseId.equals(course.getId())) {
+                        coursesForStudent.add(course);
+                    }
+                }
+            }
+            student.setEnrolledCourses(coursesForStudent);
+            student.setTotalCredits(studentId.getTotalCredits());
+            students.add(student);
+        }
+        return students;
     }
 
     /**

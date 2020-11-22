@@ -12,8 +12,10 @@ public class CourseView {
         System.out.println("Teacher: " + courseTeacher.firstName + " " + courseTeacher.lastName);
         System.out.println("Max number of students: " + courseMaxEnrollment);
         System.out.println("Students enrolled: ");
-        for (Student stud : courseStudentsEnrolled){
-            System.out.println(stud.getFirstName() + " " + stud.getLastName());
+        if (courseStudentsEnrolled != null) {
+            for (Student stud : courseStudentsEnrolled) {
+                System.out.println(stud.getFirstName() + " " + stud.getLastName());
+            }
         }
         System.out.println("Credits: " + courseCredits);
     }

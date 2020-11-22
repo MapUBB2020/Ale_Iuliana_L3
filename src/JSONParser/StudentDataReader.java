@@ -15,17 +15,17 @@ import java.util.List;
 import lab3.model.Student;
 
 public class StudentDataReader{
-    public List<Student> initialiseData() throws IOException {
+    public List<StudentId> initialiseData() throws IOException {
         StudentRepository studentRepository = new StudentRepository();
 
         Path path = Paths.get("students.json");
-        List<Student> studentsFromJson = new ArrayList<Student>();
+        List<StudentId> studentsFromJson = new ArrayList<>();
 
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
         try (Reader reader = Files.newBufferedReader(path)) {
             studentsFromJson = gson.fromJson(reader,
-                    new TypeToken<List<Student>>(){}.getType());
+                    new TypeToken<List<StudentId>>(){}.getType());
             studentsFromJson.forEach(System.out::println);
         }
 
