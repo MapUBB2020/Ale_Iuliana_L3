@@ -10,9 +10,7 @@ import lab3.model.Student;
 import lab3.model.Teacher;
 import lab3.view.CourseView;
 import lab3.view.StudentView;
-import lab3.view.TeacherView;
 
-import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
@@ -27,23 +25,40 @@ public class Console {
         this.regsys = regsys;
     }
 
-    public void getStudentData(Long IdStudent){
+    public void getStudentData(Long IdStudent) throws WrongInput {
         Scanner scanner = new Scanner(System.in);
         //Student student = new Student();
 
         System.out.println("First Name: ");
         String firstName = scanner.nextLine();
+        studentController.setStudentFirstName(firstName);
         System.out.println("Last Name:");
         String lastName = scanner.nextLine();
-        studentController.setStudentId(IdStudent);
-        studentController.setStudentFirstName(firstName);
         studentController.setStudentLastName(lastName);
+        studentController.setStudentId(IdStudent);
         //List<Course> coursesStudent = new ArrayList<Course>();
         //studentController.setStudentEnrolledCourses(coursesStudent);
 
         //return student;
     }
 
+    public boolean courseExists(Long courseId){
+        List<Course> courses= regsys.getAllCourses();
+        for (Course course: courses) {
+            if (course.getId().equals(courseId))
+                return true;
+        }
+        return false;
+    }
+
+    public boolean teacherExists(Long teacherID){
+        List<Teacher> teachers= regsys.getTeacherRepository().teachers;
+        for (Teacher teacher: teachers) {
+            if (teacher.getID() == (teacherID))
+                return true;
+        }
+        return false;
+    }
     /**
      * The menu for the application
      */
@@ -84,10 +99,9 @@ public class Console {
                                 for (Student stud : allStudents) {
                                     if (stud.getId().equals(IdStudent)) {
                                         student = stud; //stud(eC: bd, sda)
-                                    } else {
-                                        getStudentData(IdStudent);
                                     }
                                 }
+                                getStudentData(IdStudent);
                             }
                         } catch (InputMismatchException e) {
                             throw new WrongInput("The student id should be of type long");
@@ -115,12 +129,22 @@ public class Console {
                     }
                     case 3: {
                         System.out.println("Course details");
-                        System.out.println("Id: ");
-                        Long courseId = scanner.nextLong();
-                        List<Student> students = regsys.retrieveStudentsEnrolledForACourse(courseId);
-                        for (Student student : students) {
-                            System.out.println(student.getFirstName());
-                            System.out.println(student.getLastName());
+                        try {
+                            System.out.println("Id: ");
+                            Long courseId = scanner.nextLong();
+                            if (!courseExists(courseId))
+                            {
+                                System.out.println("The course with the given id does nt exist");
+                                break;
+                            }
+                            List<Student> students = regsys.retrieveStudentsEnrolledForACourse(courseId);
+                            for (Student student : students) {
+                                System.out.println(student.getFirstName());
+                                System.out.println(student.getLastName());
+                            }
+                        }
+                        catch (InputMismatchException e) {
+                            throw new WrongInput("Id should be of type int.");
                         }
                         break;
                     }
@@ -140,11 +164,23 @@ public class Console {
                         break;
                     }
                     case 5: {
-                        System.out.println("Teacher Id: ");
-                        Long teacherId = scanner.nextLong();
-                        System.out.println("Course Id: ");
-                        Long courseIdNew = scanner.nextLong();
-                        regsys.deleteCourse(teacherId, courseIdNew);
+                        try {
+                            System.out.println("Teacher Id: ");
+                            Long teacherId = scanner.nextLong();
+                            if (!teacherExists(teacherId)){
+                                System.out.println("The teacher with the given id does not exist");
+                                break;
+                            }
+                            System.out.println("Course Id: ");
+                            Long courseIdNew = scanner.nextLong();
+                            if (!courseExists(teacherId)){
+                                System.out.println("The course with the given id does not exist");
+                                break;
+                            }
+                            regsys.deleteCourse(teacherId, courseIdNew);
+                        } catch (InputMismatchException e) {
+                            throw new WrongInput("Teacher id and course id should be both of type int.");
+                        }
                         break;
                     }
                     case 6: {
