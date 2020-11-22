@@ -1,6 +1,9 @@
 package lab3;
 
 import JSONParser.StudentDataWriter;
+import JSONParser.StudentId;
+import JSONParser.TeacherDataWriter;
+import JSONParser.TeacherId;
 import lab3.model.Course;
 import lab3.model.Person;
 import lab3.model.Student;
@@ -21,6 +24,7 @@ public class RegistrationSystem {
     private StudentRepository studentRepository;
     private TeacherRepository teacherRepository;
     StudentDataWriter studentDataWriter = new StudentDataWriter();
+    TeacherDataWriter teacherDataWriter = new TeacherDataWriter();
 
     public RegistrationSystem(CourseRepository courseRepository,
                               StudentRepository studentRepository,
@@ -44,7 +48,10 @@ public class RegistrationSystem {
     }
 
     public void writeToJson() throws IOException {
-        studentDataWriter.writeData(studentRepository.students);
+        List<TeacherId> teachersId = teacherRepository.changeToTeacherId();
+        List<StudentId> studentsId = studentRepository.changeToStudentId();
+        teacherDataWriter.writeData(teachersId);
+        studentDataWriter.writeData(studentsId);
     }
 
     /**
@@ -60,7 +67,6 @@ public class RegistrationSystem {
                 course = newCourse;
             }
         }
-
         if (course.getMaxEnrollment() > course.getStudentsEnrolled().size()) {
             List<Course> enrolledCourses = student.getEnrolledCourses();
             enrolledCourses.add(course);
@@ -78,6 +84,7 @@ public class RegistrationSystem {
                     studentRepository.save(student);
                 }
                 courseRepository.update(course);
+                System.out.println(student.getTotalCredits());
                 return true;
             } else {
                 System.out.println("Maximum credits for student reached! Cannot choose this course.");
