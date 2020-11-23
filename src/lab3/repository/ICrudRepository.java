@@ -10,6 +10,14 @@ import java.text.ParseException;
  */
 public interface ICrudRepository<E> {
 
+    /**
+     *
+     * @throws IOException
+     * @throws ParseException
+     * @throws IncorrectFileNameException
+     * Method to read from the json file a list of object with id's and convert it in a list of objects instead of id's
+     * For ex. if the teacher has the list of courses [1,2,3], we will modify it in the list of objects with id 1,2,3
+     */
     void initialise() throws IOException, ParseException, IncorrectFileNameException;
 
     /**

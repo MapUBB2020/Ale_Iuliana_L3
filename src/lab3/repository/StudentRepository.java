@@ -24,18 +24,40 @@ public class StudentRepository implements ICrudRepository<Student>{
     StudentDataReader studentDataReader = new StudentDataReader();
     public List<Course> courses = new ArrayList<>();
 
+    /**
+     * Default empty constructor
+     */
     public StudentRepository() {
     }
 
+    /**
+     *
+     * @param courses
+     * Default constructor for student repo with the list of courses
+     */
     public StudentRepository(List<Course> courses) {
         this.courses = courses;
     }
 
+    /**
+     *
+     * @throws IOException
+     * @throws ParseException
+     * @throws IncorrectFileNameException
+     */
     @Override
     public void initialise() throws IOException, ParseException, IncorrectFileNameException {
         students = changeStudent();
     }
 
+    /**
+     * Method that reads from the json file the list of students with id's for the enrolled courses
+     * and converts the id's in Course objects
+     * @return the list of students
+     * @throws IOException
+     * @throws ParseException
+     * @throws IncorrectFileNameException
+     */
     public List<Student> changeStudent() throws IOException, ParseException, IncorrectFileNameException {
         List<StudentId> studentsId = studentDataReader.initialiseData();
         List<Student> students = new ArrayList<>();
@@ -59,6 +81,11 @@ public class StudentRepository implements ICrudRepository<Student>{
         return students;
     }
 
+    /**
+     *
+     * @return the list of students with id's
+     * Method that converts from  object to id (the opposite of the former method)
+     */
     public List<StudentId> changeToStudentId() {
         List<StudentId> studentsId = new ArrayList<>();
 

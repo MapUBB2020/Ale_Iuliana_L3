@@ -18,10 +18,22 @@ import java.util.List;
 
 public class TeacherDataWriter {
 
+    /**
+     *
+     * @param filename
+     * @return true if the filename is correct, false otherwise
+     */
     public boolean isCorrectFileName(String filename){
-        return filename.equals("students.json");
+        return filename.equals("teachers.json");
     }
 
+    /**
+     * Method that writes to "teachers.json" a list of teachers that has a list of courses id's
+     * @param teachers
+     * @throws IOException
+     * @throws IncorrectFileNameException
+     *
+     */
     public void writeData(List<TeacherId> teachers) throws IOException, IncorrectFileNameException {
         Path path = Paths.get("teachers.json");
         try (Writer writer = Files.newBufferedWriter(path,  StandardCharsets.UTF_8)) {

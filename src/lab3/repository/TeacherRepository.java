@@ -42,6 +42,13 @@ public class TeacherRepository implements ICrudRepository<Teacher> {
         teachers = changeTeacher();
     }
 
+    /**
+     * Method that reads the list of teachers with a list of courses id's and the other attributes
+     * @return
+     * @throws IOException
+     * @throws ParseException
+     * @throws IncorrectFileNameException
+     */
     public List<Teacher> changeTeacher() throws IOException, ParseException, IncorrectFileNameException {
         List<TeacherId> teachersId = teacherDataReader.initialiseData();
         List<Teacher> teachers = new ArrayList<>();
@@ -55,6 +62,10 @@ public class TeacherRepository implements ICrudRepository<Teacher> {
         return teachers;
     }
 
+    /**
+     * Method that changes from the list of teachers with a list of courses to a list of teachers with a list of courses id's
+     * @return the teachers with a list of courses id's
+     */
     public List<TeacherId> changeToTeacherId() {
         List<TeacherId> teachersId = new ArrayList<>();
 
@@ -73,6 +84,11 @@ public class TeacherRepository implements ICrudRepository<Teacher> {
         return teachersId;
     }
 
+    /**
+     * Method that sets the relations between teacher and courses
+     * We add to the courses list from teacher, the courses which are associated to that teacher
+     * @param courseRepository
+     */
     public void setRelations(CourseRepository courseRepository) {
         for (Course course: courseRepository.findAll()) {
             findOne(course.getTeacher().getID()).getCourses().add(course);

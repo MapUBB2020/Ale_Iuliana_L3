@@ -35,6 +35,12 @@ public class CourseRepository implements ICrudRepository<Course>{
         courseRepo = changeCourse();
     }
 
+    /**
+     * Method that reads a list of courses with teacher id instead of teacher object and converts the id to object
+     * @return the list of courses with teachers, not with id's
+     * @throws IOException
+     * @throws ParseException
+     */
     public List<Course> changeCourse() throws IOException, ParseException {
         List<CourseId> coursesId = courseDataReader.initialiseData();
         List<Course> courses = new ArrayList<>();
@@ -54,6 +60,11 @@ public class CourseRepository implements ICrudRepository<Course>{
         return courses;
     }
 
+    /**
+     * Method that sets the studentsEnrolled list by iterating through bothe the students and courses list
+     * We add the student which is enrolled at a course to the list of studentsEnrolled from Course
+     * @param studentRepository
+     */
     public void setRelations(StudentRepository studentRepository) {
         for (Student student: studentRepository.findAll()) {
             for (Course course: student.getEnrolledCourses()) {

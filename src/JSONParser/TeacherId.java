@@ -7,6 +7,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * We created another class for teacher that has a list of id's instead a list of Course objects
+ * In the TeacherRepository --> convert from list of course id's to list of courses
+ */
 public class TeacherId extends Person{
     private Long teacherID;
     private List<Long> courses = new ArrayList<>(Arrays.asList());

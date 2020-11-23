@@ -5,6 +5,10 @@ import lab3.model.Student;
 
 import java.util.List;
 
+/**
+ * We created another class for course that has an id instead of the object teacher
+ * The studentsEnrolled list will be created in the CourseRepository when we set the relations
+ */
 public class CourseId {
     private Long id;
     private String name;

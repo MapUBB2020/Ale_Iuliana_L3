@@ -17,6 +17,12 @@ import java.util.List;
 
 public class CourseDataReader {
 
+    /**
+     *
+     * @return
+     * @throws IOException
+     * @throws ParseException
+     */
     public List<CourseId> initialiseData() throws IOException, ParseException {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
 

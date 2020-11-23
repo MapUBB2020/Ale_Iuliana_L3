@@ -17,11 +17,21 @@ import java.nio.file.Paths;
 import java.util.List;
 
 public class StudentDataWriter {
-
+    /**
+     *
+     * @param filename
+     * @return true if the filename is correct, false otherwise
+     */
     public boolean isCorrectFileName(String filename){
         return filename.equals("students.json");
     }
 
+    /**
+     * Method that writes to the gson file a list of students with id's for the enrolled courses
+     * @param students
+     * @throws IOException
+     * @throws IncorrectFileNameException
+     */
     public void writeData(List<StudentId> students) throws IOException, IncorrectFileNameException {
         Path path = Paths.get("students.json");
         try (Writer writer = Files.newBufferedWriter(path,  StandardCharsets.UTF_8)) {

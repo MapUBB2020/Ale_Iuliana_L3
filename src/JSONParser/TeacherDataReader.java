@@ -19,10 +19,22 @@ import java.io.Reader;
 
 public class TeacherDataReader {
 
+    /**
+     *
+     * @param filename
+     * @return true if the filename is correct, false otherwise
+     */
     public boolean isCorrectFileName(String filename){
-        return filename.equals("students.json");
+        return filename.equals("teachers.json");
     }
 
+    /**
+     * Method that reads from the file a list of teacher objects with courses id's
+     * @return a list of teachers which has a list of courses id's, after we read it from the file
+     * @throws IOException
+     * @throws ParseException
+     * @throws IncorrectFileNameException
+     */
     public List<TeacherId> initialiseData() throws IOException, ParseException, IncorrectFileNameException {
         TeacherRepository teacherRepository = new TeacherRepository();
 
