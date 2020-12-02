@@ -6,6 +6,10 @@ import lab3.model.Person;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * We created another class for student that has a list of enrolledCourses with the id's of those courses
+ * In the StudentRepository --> convert from list of course id's to list of courses
+ */
 public class StudentId extends Person {
     private Long studentId;
     private int totalCredits = 0;

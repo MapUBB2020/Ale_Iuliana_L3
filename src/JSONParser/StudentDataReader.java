@@ -18,10 +18,21 @@ import lab3.model.Student;
 
 public class StudentDataReader{
 
+    /**
+     *
+     * @param filename
+     * @return true if the filename is correct, false otherwise
+     */
     public boolean isCorrectFileName(String filename){
         return filename.equals("students.json");
     }
 
+    /**
+     * Method that reads from the file a list of students that has a list of enrolled courses as id's
+     * @return the list of students
+     * @throws IOException
+     * @throws IncorrectFileNameException
+     */
     public List<StudentId> initialiseData() throws IOException, IncorrectFileNameException {
         StudentRepository studentRepository = new StudentRepository();
 

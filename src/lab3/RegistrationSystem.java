@@ -48,6 +48,12 @@ public class RegistrationSystem {
         return teacherRepository;
     }
 
+    /**
+     * Method that writes to the json files the list of students and teachers
+     * Uses the methods from the JSONParser package that we created
+     * @throws IOException
+     * @throws IncorrectFileNameException
+     */
     public void writeToJson() throws IOException, IncorrectFileNameException {
         List<TeacherId> teachersId = teacherRepository.changeToTeacherId();
         List<StudentId> studentsId = studentRepository.changeToStudentId();
@@ -165,12 +171,21 @@ public class RegistrationSystem {
         courseRepository.delete(course.getId());
     }
 
+    /**
+     * Method that sorts the courses by the number of credits
+     * @return the courses in ascendent order after the credits number
+     */
     public List<Course> sortByCredits() {
         List<Course> sortedCourses = courseRepository.findAll();
         sortedCourses.sort((course1, course2) -> course1.getCredits() - course2.getCredits());
         return sortedCourses;
     }
 
+    /**
+     * Method that filters the courses for a particular teacher
+     * @param teacher
+     * @return a list of courses that have the same teacher
+     */
     public List<Course> filterByTeacher(Person teacher) {
         List<Course> courseRepo = courseRepository.findAll();
         return courseRepo.stream()
