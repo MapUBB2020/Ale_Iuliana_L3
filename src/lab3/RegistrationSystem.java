@@ -85,7 +85,6 @@ public class RegistrationSystem {
                     studentRepository.save(student);
                 }
                 courseRepository.update(course);
-                System.out.println(student.getTotalCredits());
                 return true;
             } else {
                 System.out.println("Maximum credits for student reached! Cannot choose this course.");
