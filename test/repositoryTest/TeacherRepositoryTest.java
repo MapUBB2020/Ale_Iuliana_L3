@@ -33,18 +33,16 @@ public class TeacherRepositoryTest {
         teacherRepository.save(t3);
         teacherRepository.save(t4);
 
-        Assert.assertEquals(teacherRepository.teachers.get(2).firstName, "Hannelore");
-        Assert.assertEquals(teacherRepository.teachers.get(2).getCourses().get(0).getName(), "WS");
-        Assert.assertEquals(teacherRepository.teachers.get(3).firstName, "Christian");
-        Assert.assertEquals(teacherRepository.teachers.get(3).getCourses().get(0).getName(), "Programare logica");
+        Assert.assertEquals(teacherRepository.teachers.get(0).firstName, "Hannelore");
+        Assert.assertEquals(teacherRepository.teachers.get(0).getCourses().get(0).getName(), "WS");
+        Assert.assertEquals(teacherRepository.teachers.get(1).firstName, "Christian");
+        Assert.assertEquals(teacherRepository.teachers.get(1).getCourses().get(0).getName(), "Programare logica");
 
         Assert.assertNull(teacherRepository.findOne((long)5));
         Assert.assertEquals(teacherRepository.findOne((long)3).lastName, "Lisei");
         Assert.assertEquals(teacherRepository.findOne((long)4).lastName, "Sacarea");
 
         List<Teacher> teacherList = new ArrayList<Teacher>(Arrays.asList(t3,t4));
-        //not equal fiindca mai am 2 profesori inserati in repo
-        Assert.assertNotEquals(teacherRepository.findAll(),teacherList);
 
         Assert.assertEquals(teacherRepository.save(t3),t3);
         Assert.assertEquals(teacherRepository.save(t4),t4);
