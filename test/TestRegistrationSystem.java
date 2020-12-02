@@ -28,8 +28,8 @@ public class TestRegistrationSystem {
         l1.add(c1);
         l1.add(c2);
 
-        Assert.assertNotNull(regSys.retrieveCoursesWithFreePlaces());
-        Assert.assertNotEquals(regSys.retrieveCoursesWithFreePlaces(),l1);
+        courseRepository.save(c1);
+        courseRepository.save(c2);
 
         Course c3 = new Course((long) 1, "BD", new Teacher(new ArrayList<Course>(), (long) 1, "Diana", "Troanca"), 30, new ArrayList<Student>(),6);
         Course c4 = new Course((long) 2, "MAP", new Teacher(new ArrayList<Course>(), (long) 2, "Catalin", "Rusu"), 30, new ArrayList<Student>(),6);
@@ -37,24 +37,24 @@ public class TestRegistrationSystem {
         l2.add(c3);
         l2.add(c4);
 
-        Assert.assertEquals(regSys.retrieveCoursesWithFreePlaces().get(0).getName(),l2.get(0).getName());
-        Assert.assertEquals(regSys.retrieveCoursesWithFreePlaces().get(0).getCredits(),6);
-        Assert.assertEquals(regSys.retrieveCoursesWithFreePlaces().get(0).getMaxEnrollment(),l2.get(0).getMaxEnrollment());
-        Assert.assertEquals(regSys.retrieveCoursesWithFreePlaces().get(0).getTeacher().firstName, "Diana");
+        courseRepository.save(c3);
+        courseRepository.save(c4);
+
+        Assert.assertEquals(regSys.retrieveCoursesWithFreePlaces().get(2).getName(),l2.get(0).getName());
+        Assert.assertEquals(regSys.retrieveCoursesWithFreePlaces().get(2).getCredits(),6);
+        Assert.assertEquals(regSys.retrieveCoursesWithFreePlaces().get(3).getMaxEnrollment(),l2.get(0).getMaxEnrollment());
+        Assert.assertEquals(regSys.retrieveCoursesWithFreePlaces().get(2).getTeacher().firstName, "Diana");
 
 
-        Assert.assertEquals(regSys.retrieveCoursesWithFreePlaces().get(1).getName(),l2.get(1).getName());
-        Assert.assertEquals(regSys.retrieveCoursesWithFreePlaces().get(1).getCredits(),l2.get(1).getCredits());
+        Assert.assertEquals(regSys.retrieveCoursesWithFreePlaces().get(1).getName(),l1.get(1).getName());
+        Assert.assertEquals(regSys.retrieveCoursesWithFreePlaces().get(1).getCredits(),l1.get(1).getCredits());
         Assert.assertEquals(regSys.retrieveCoursesWithFreePlaces().get(1).getMaxEnrollment(),30);
-        Assert.assertEquals(regSys.retrieveCoursesWithFreePlaces().get(1).getTeacher().firstName, "Catalin");
+        Assert.assertEquals(regSys.retrieveCoursesWithFreePlaces().get(3).getTeacher().firstName, "Catalin");
 
-        Assert.assertNotEquals(regSys.getAllCourses().get(0),l1.get(0));
-        Assert.assertNotEquals(regSys.getAllCourses().get(1),l1.get(1));
-        Assert.assertEquals(regSys.getAllCourses().get(0).getName(),l2.get(0).getName());
+        Assert.assertNotEquals(regSys.getAllCourses().get(1).getName(),l2.get(1).getName());
+        Assert.assertEquals(regSys.getAllCourses().get(0).getName(),l1.get(0).getName());
         Assert.assertEquals(regSys.getAllCourses().get(1).getCredits(),l2.get(1).getCredits());
 
-        courseRepository.save(c1);
-        courseRepository.save(c2);
         Student s1 = new Student((long)1, "Alexandra", "Negru");
         Student s2 = new Student((long)2, "Iuliana", "Popa");
         Student s3 = new Student((long)3, "Aaa", "Bbb");
