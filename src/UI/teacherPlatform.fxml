@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UI.TeacherPlatform">
+   <Label fx:id="IDTeacher" layoutX="79.0" layoutY="52.0" prefHeight="21.0" prefWidth="277.0" text="Your ID:" wrapText="true">
+      <font>
+         <Font name="System Italic" size="16.0" />
+      </font></Label>
+   <Label fx:id="teacherName" layoutX="79.0" layoutY="98.0" prefHeight="21.0" prefWidth="277.0" text="Professor name:" wrapText="true">
+      <font>
+         <Font name="System Italic" size="16.0" />
+      </font></Label>
+   <Label fx:id="coursesInfo" layoutX="150.0" layoutY="179.0" text="Cursuri+studenti inscrisi:" wrapText="true">
+      <font>
+         <Font name="System Italic" size="16.0" />
+      </font></Label>
+</AnchorPane>
