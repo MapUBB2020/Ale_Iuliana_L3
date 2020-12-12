@@ -16,5 +16,14 @@
     ],
     "firstName": "Iuliana",
     "lastName": "Popa"
+  },
+  {
+    "studentId": 3,
+    "totalCredits": 5,
+    "enrolledCourses": [
+      2
+    ],
+    "firstName": "Abc",
+    "lastName": "Def"
   }
 ]
