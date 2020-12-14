@@ -16,11 +16,8 @@ import java.io.IOException;
 import java.text.ParseException;
 
 public class Controller {
-    static TeacherRepository teacherRepository;
-    static CourseRepository courseRepository;
-    static StudentRepository studentRepository;
-    Stage windowStudent = new Stage();
-    Stage windowTeacher = new Stage();
+    static Stage windowStudent = new Stage();
+    static Stage windowTeacher = new Stage();
     @FXML
     Button studentButton;
     @FXML
@@ -30,14 +27,14 @@ public class Controller {
 
     @FXML
     void initialize() throws ParseException, IncorrectFileNameException, IOException {
-         teacherRepository = new TeacherRepository();
+        TeacherRepository teacherRepository = new TeacherRepository();
 
         teacherRepository.initialise();
 
-         courseRepository = new CourseRepository(teacherRepository.teachers);
+        CourseRepository courseRepository = new CourseRepository(teacherRepository.teachers);
         courseRepository.initialise();
 
-         studentRepository = new StudentRepository(courseRepository.courseRepo);
+        StudentRepository studentRepository = new StudentRepository(courseRepository.courseRepo);
         try {
             studentRepository.initialise();
         } catch (Exception NullPointerException) {
