@@ -12,6 +12,7 @@ import lab3.model.Teacher;
 import lab3.repository.CourseRepository;
 import lab3.repository.StudentRepository;
 import lab3.repository.TeacherRepository;
+import org.hamcrest.CoreMatchers;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -73,6 +74,11 @@ public class RegistrationSystem {
             if (newCourse.getId().equals(id)) {
                 course = newCourse;
             }
+        }
+        List<Course> coursesStudentEnrolledIn = student.getEnrolledCourses();
+        for (Course course1: coursesStudentEnrolledIn) {
+            if (course == course1)
+                return false;
         }
         if (course.getMaxEnrollment() > course.getStudentsEnrolled().size()) {
             List<Course> enrolledCourses = student.getEnrolledCourses();
