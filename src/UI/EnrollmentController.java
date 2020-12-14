@@ -12,8 +12,9 @@ import lab3.model.Student;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Observable;
 
-public class EnrollmentController {
+public class EnrollmentController extends Observable {
     public VBox enrollmentPage;
     public static Student studentLogged;
 
@@ -34,6 +35,8 @@ public class EnrollmentController {
                     if (isRegistered) {
                         try {
                             Controller.registrationSystem.writeToJson();
+                            setChanged();
+                            notifyObservers();
                         } catch (IOException | IncorrectFileNameException e) {
                             e.printStackTrace();
                         }
