@@ -16,9 +16,11 @@ import lab3.model.Student;
 import lab3.model.Teacher;
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.Observable;
+import java.util.Observer;
 
 
-public class TeacherController {
+public class TeacherController implements Observer {
     public static String teacherIdText;
     public static String firstNameText;
     public static String lastNameText;
@@ -82,5 +84,10 @@ public class TeacherController {
         }
 
 
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        System.out.println("Done");
     }
 }
