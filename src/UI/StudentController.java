@@ -35,7 +35,11 @@ public class StudentController {
         List<Student> students = Controller.registrationSystem.getStudentRepository().students;
         for (Student student: students) {
             if (student.getFirstName().equals(firstName) && student.getLastName().equals(lastName)) {
-                EnrollmentController.studentLogged = new Student(student.getId(), firstName, lastName);
+                EnrollmentController.studentLogged = new Student(firstName,
+                        lastName,
+                        student.getId(),
+                        student.getTotalCredits(),
+                        student.getEnrolledCourses());
                 Parent studentLogin = FXMLLoader.load(getClass().getResource("studentLogin.fxml"));
                 Controller.windowStudent.setTitle("Student");
                 Controller.windowStudent.setScene(new Scene(studentLogin));
