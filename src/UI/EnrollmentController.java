@@ -17,6 +17,7 @@ import java.util.Observable;
 public class EnrollmentController extends Observable {
     public VBox enrollmentPage;
     public static Student studentLogged;
+    private final TeacherPlatform teacherPlatform = new TeacherPlatform();
 
     @FXML
     void initialize() {
@@ -28,6 +29,7 @@ public class EnrollmentController extends Observable {
             enrollmentPage.getChildren().add(new Label(String.valueOf(course.getCredits()) + " credits"));
             Button enrollButton = new Button();
             enrollButton.setText("ENROLL");
+            addObserver(teacherPlatform);
             enrollButton.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
