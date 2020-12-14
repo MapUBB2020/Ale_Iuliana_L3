@@ -44,7 +44,6 @@ public class StudentDataReader{
         try (Reader reader = Files.newBufferedReader(path)) {
             studentsFromJson = gson.fromJson(reader,
                     new TypeToken<List<StudentId>>(){}.getType());
-            studentsFromJson.forEach(System.out::println);
         }catch(FileNotFoundException e) {
             if (!isCorrectFileName(path.toString()))
                 throw new IncorrectFileNameException("Incorrect filename: " + path.toString());
