@@ -1,5 +1,6 @@
 package UI;
 
+import Exceptions.IncorrectFileNameException;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -9,6 +10,7 @@ import javafx.scene.layout.VBox;
 import lab3.model.Course;
 import lab3.model.Student;
 
+import java.io.IOException;
 import java.util.List;
 
 public class EnrollmentController {
@@ -28,7 +30,17 @@ public class EnrollmentController {
             enrollButton.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
-                    Controller.registrationSystem.register(course.getId(), studentLogged);
+                    boolean isRegistered = Controller.registrationSystem.register(course.getId(), studentLogged);
+                    if (isRegistered) {
+                        try {
+                            Controller.registrationSystem.writeToJson();
+                        } catch (IOException | IncorrectFileNameException e) {
+                            e.printStackTrace();
+                        }
+                    } else {
+                        enrollmentPage.getChildren().add(new Label("Could not enroll!"));
+                    }
+                    enrollButton.setDisable(true);
                 }
             });
             enrollmentPage.getChildren().add(enrollButton);
