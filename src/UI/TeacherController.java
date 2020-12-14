@@ -19,7 +19,6 @@ import java.text.ParseException;
 
 
 public class TeacherController {
-    public static Controller controller;
     public static String teacherIdText;
     public static String firstNameText;
     public static String lastNameText;
@@ -47,18 +46,10 @@ public class TeacherController {
         firstNameText = firstName.getText().toString();
         lastNameText = lastName.getText().toString();
 
-        //in initialise() se fac citirile pt fiecare obiect, dupa care fac legaturile intre clase
-        Controller.studentRepository.initialise();
-        Controller.courseRepository.initialise();
-        Controller.teacherRepository.initialise();
-        Controller.teacherRepository.setRelations(Controller.courseRepository);
-        Controller.courseRepository.changeCourse();
-        Controller.courseRepository.setRelations(Controller.studentRepository);
-
         coursesInfo = "";
         Teacher foundTeacher = new Teacher();
         boolean found = false;
-        for (Teacher teacher : Controller.teacherRepository.teachers)
+        for (Teacher teacher : Controller.registrationSystem.getTeacherRepository().teachers)
             if (String.valueOf(teacher.getID()).equals(teacherIdText) && teacher.getFirstName().equals(firstNameText) && teacher.getLastName().equals(lastNameText)) {
                 found = true;
                 foundTeacher = teacher;
@@ -79,9 +70,9 @@ public class TeacherController {
             }
             Parent finishRoot = FXMLLoader.load(getClass().getResource("teacherPlatform.fxml"));
             Scene teacherPlatform = new Scene(finishRoot);
-            Main.primaryStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-            Main.primaryStage.setScene(teacherPlatform);
-            Main.primaryStage.show();
+            Controller.windowTeacher = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+            Controller.windowTeacher.setScene(teacherPlatform);
+            Controller.windowTeacher.show();
         }
 
         if (!found)
