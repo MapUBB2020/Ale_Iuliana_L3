@@ -17,6 +17,13 @@ public class Student extends Person{
         //this.enrolledCourses = enrolledCourses;
     }
 
+    public Student(String firstName, String lastName, Long studentId, int totalCredits, List<Course> enrolledCourses) {
+        super(firstName, lastName);
+        this.studentId = studentId;
+        this.totalCredits = totalCredits;
+        this.enrolledCourses = enrolledCourses;
+    }
+
     public Long getId() {
         return studentId;
     }
