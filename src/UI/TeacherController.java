@@ -20,7 +20,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 
-public class TeacherController implements Observer {
+public class TeacherController {
     public static String teacherIdText;
     public static String firstNameText;
     public static String lastNameText;
@@ -84,10 +84,5 @@ public class TeacherController implements Observer {
         }
 
 
-    }
-
-    @Override
-    public void update(Observable o, Object arg) {
-        System.out.println("Done");
     }
 }
