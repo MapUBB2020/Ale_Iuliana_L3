@@ -2,12 +2,9 @@ package lab3.repository;
 
 import Exceptions.IncorrectFileNameException;
 import JSONParser.StudentDataReader;
-import JSONParser.StudentDataWriter;
 import JSONParser.StudentId;
-import JSONParser.TeacherId;
 import lab3.model.Course;
 import lab3.model.Student;
-import lab3.model.Teacher;
 
 import java.io.IOException;
 import java.text.ParseException;
@@ -71,6 +68,7 @@ public class StudentRepository implements ICrudRepository<Student>{
                 for (Course course: courses) {
                     if (courseId.equals(course.getId())) {
                         coursesForStudent.add(course);
+                        break;
                     }
                 }
             }
