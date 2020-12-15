@@ -2,7 +2,7 @@ package UI;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import lab3.model.Course;
 import lab3.model.Student;
 import lab3.model.Teacher;
@@ -18,23 +18,26 @@ public class TeacherPlatform implements Observer {
     @FXML
     public Label coursesInfo;
     @FXML
-    public AnchorPane mainPane;
+    public VBox mainPane;
+    //public static VBox staticMainPane;
+    public static Label staticCoursesInfo;
+    public String coursesInfoString = "";
 
     public static Teacher teacherLogged;
 
     @FXML
     public void initialize() {
+        //staticMainPane = mainPane;
+        staticCoursesInfo = coursesInfo;
         IDTeacher.setText("Your university ID: " + TeacherController.teacherIdText);
         teacherName.setText(TeacherController.lastNameText + " " + TeacherController.firstNameText);
         coursesInfo.setText(String.valueOf(TeacherController.coursesInfo));
-      }
+    }
 
     @Override
     public void update(Observable o, Object arg) {
-        System.out.println("Done");
-        String coursesInfoString = "";
         for (Course course : teacherLogged.getCourses()) {
-            coursesInfoString = "Course: " + coursesInfo + "\t" + course.getName() + "\n";
+            coursesInfoString = "Course: " + "\t" + course.getName() + "\n";
             if (course.getStudentsEnrolled().size() == 0) {
                 coursesInfoString += "No students";
                 break;
@@ -45,8 +48,9 @@ public class TeacherPlatform implements Observer {
                 coursesInfoString = coursesInfoString + "\t" + i + ". " + student.firstName + " " + student.lastName + "\n";
                 i++;
             }
-            mainPane.getChildren().add(new Label(coursesInfoString));
+            //staticMainPane.getChildren().add(new Label(coursesInfoString));
         }
+        staticCoursesInfo.setText(coursesInfoString);
         //coursesInfo.setText(coursesInfoString);
     }
 }
