@@ -11,20 +11,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import lab3.model.Course;
-import lab3.model.Student;
 import lab3.model.Teacher;
 import java.io.IOException;
 import java.text.ParseException;
-import java.util.Observable;
-import java.util.Observer;
-
 
 public class TeacherController {
     public static String teacherIdText;
     public static String firstNameText;
     public static String lastNameText;
-    public static String coursesInfo;
 
     @FXML
     public Button loginButton;
@@ -48,29 +42,13 @@ public class TeacherController {
         firstNameText = firstName.getText().toString();
         lastNameText = lastName.getText().toString();
 
-        coursesInfo = "";
-        Teacher foundTeacher = new Teacher();
         boolean found = false;
         for (Teacher teacher : Controller.registrationSystem.getTeacherRepository().teachers)
             if (String.valueOf(teacher.getID()).equals(teacherIdText) && teacher.getFirstName().equals(firstNameText) && teacher.getLastName().equals(lastNameText)) {
                 found = true;
-                foundTeacher = teacher;
-                TeacherPlatform.teacherLogged = foundTeacher;
+                TeacherPlatform.teacherLogged = teacher;
             }
         if (found) {
-            for (Course course : foundTeacher.getCourses()) {
-                coursesInfo += "Course: " + "\t" + course.getName() + "\n";
-                if (course.getStudentsEnrolled().size() == 0) {
-                    coursesInfo += "No students";
-                    break;
-                }
-                coursesInfo += "Enrolled students: \n";
-                int i = 1;
-                for (Student student : course.getStudentsEnrolled()) {
-                    coursesInfo = coursesInfo + "\t" + i + ". " + student.firstName + " " + student.lastName + "\n";
-                    i++;
-                }
-            }
             Parent finishRoot = FXMLLoader.load(getClass().getResource("teacherPlatform.fxml"));
             Scene teacherPlatform = new Scene(finishRoot);
             Controller.windowTeacher = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
