@@ -12,5 +12,12 @@
     "teacherId": 2,
     "maxEnrollment": 30,
     "credits": 5
+  },
+  {
+    "id": 3,
+    "name": "OOP",
+    "teacherId": 2,
+    "maxEnrollment": 30,
+    "credits": 6
   }
 ]
