@@ -55,6 +55,7 @@ public class TeacherController {
             if (String.valueOf(teacher.getID()).equals(teacherIdText) && teacher.getFirstName().equals(firstNameText) && teacher.getLastName().equals(lastNameText)) {
                 found = true;
                 foundTeacher = teacher;
+                TeacherPlatform.teacherLogged = foundTeacher;
             }
         if (found) {
             for (Course course : foundTeacher.getCourses()) {
