@@ -59,7 +59,7 @@ public class TeacherController {
             }
         if (found) {
             for (Course course : foundTeacher.getCourses()) {
-                coursesInfo = "Course: " + coursesInfo + "\t" + course.getName() + "\n";
+                coursesInfo += "Course: " + "\t" + course.getName() + "\n";
                 if (course.getStudentsEnrolled().size() == 0) {
                     coursesInfo += "No students";
                     break;
