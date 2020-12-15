@@ -19,73 +19,38 @@ public class TeacherPlatform implements Observer {
     public Label coursesInfo;
     @FXML
     public VBox mainPane;
-    //public static VBox staticMainPane;
-    public static Label staticCoursesInfo;
-    public String coursesInfoString = "";
 
+    public static Label staticCoursesInfo;
     public static Teacher teacherLogged;
 
     @FXML
     public void initialize() {
-        //staticMainPane = mainPane;
         staticCoursesInfo = coursesInfo;
         IDTeacher.setText("Your university ID: " + TeacherController.teacherIdText);
         teacherName.setText(TeacherController.lastNameText + " " + TeacherController.firstNameText);
-        coursesInfo.setText(String.valueOf(TeacherController.coursesInfo));
+        showCoursesInfo();
     }
 
     @Override
     public void update(Observable o, Object arg) {
-        for (Course course : teacherLogged.getCourses()) {
-            coursesInfoString = "Course: " + "\t" + course.getName() + "\n";
+        showCoursesInfo();
+    }
+
+    public void showCoursesInfo() {
+        String coursesInfo = "";
+        for(Course course :teacherLogged.getCourses()) {
+            coursesInfo += "Course: " + "\t" + course.getName() + "\n";
             if (course.getStudentsEnrolled().size() == 0) {
-                coursesInfoString += "No students";
+                coursesInfo += "No students";
                 break;
             }
-            coursesInfoString += "Enrolled students: \n";
+            coursesInfo += "Enrolled students: \n";
             int i = 1;
             for (Student student : course.getStudentsEnrolled()) {
-                coursesInfoString = coursesInfoString + "\t" + i + ". " + student.firstName + " " + student.lastName + "\n";
+                coursesInfo = coursesInfo + "\t" + i + ". " + student.firstName + " " + student.lastName + "\n";
                 i++;
             }
-            //staticMainPane.getChildren().add(new Label(coursesInfoString));
         }
-        staticCoursesInfo.setText(coursesInfoString);
-        //coursesInfo.setText(coursesInfoString);
+        staticCoursesInfo.setText(coursesInfo);
     }
 }
-
-//package UI;
-//
-//import javafx.fxml.FXML;
-//import javafx.scene.control.Label;
-//import javafx.scene.layout.AnchorPane;
-//import lab3.model.Teacher;
-//
-//import java.util.Observable;
-//import java.util.Observer;
-//
-//public class TeacherPlatform implements Observer {
-//    TeacherController teacherController;
-//    @FXML
-//    public Label IDTeacher;
-//    @FXML
-//    public Label teacherName;
-//    @FXML
-//    public Label coursesInfo;
-//    @FXML
-//    public AnchorPane mainPane;
-//
-//    public void initialize() {
-//        teacherController = new TeacherController();
-//        mainPane.getChildren().add(new Label(teacherController.teacherID.getText()));
-//        mainPane.getChildren().add(new Label(teacherController.firstName.getText()));
-//        mainPane.getChildren().add(new Label(TeacherController.coursesInfo));
-//
-//    }
-//
-//    @Override
-//    public void update(Observable o, Object arg) {
-//        mainPane.getChildren().add()
-//    }
-//}
