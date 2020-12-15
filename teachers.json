@@ -2,7 +2,8 @@
   {
     "teacherID": 2,
     "courses": [
-      2
+      2,
+      3
     ],
     "firstName": "Catalin",
     "lastName": "Rusu"
