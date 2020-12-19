@@ -3,7 +3,6 @@ package lab3;
 import Exceptions.WrongInput;
 import lab3.controller.CourseController;
 import lab3.controller.StudentController;
-import lab3.controller.TeacherController;
 import lab3.model.Course;
 import lab3.model.Person;
 import lab3.model.Student;
@@ -19,7 +18,6 @@ public class Console {
     RegistrationSystem regsys;
     CourseController courseController;
     StudentController studentController;
-    TeacherController teacherController;
 
     public Console(RegistrationSystem regsys) {
         this.regsys = regsys;
@@ -27,7 +25,6 @@ public class Console {
 
     public void getStudentData(Long IdStudent) throws WrongInput {
         Scanner scanner = new Scanner(System.in);
-        //Student student = new Student();
 
         System.out.println("First Name: ");
         String firstName = scanner.nextLine();
@@ -36,10 +33,6 @@ public class Console {
         String lastName = scanner.nextLine();
         studentController.setStudentLastName(lastName);
         studentController.setStudentId(IdStudent);
-        //List<Course> coursesStudent = new ArrayList<Course>();
-        //studentController.setStudentEnrolledCourses(coursesStudent);
-
-        //return student;
     }
 
     public boolean courseExists(Long courseId){
