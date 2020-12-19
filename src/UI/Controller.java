@@ -18,13 +18,18 @@ import java.text.ParseException;
 public class Controller {
     static Stage windowStudent = new Stage();
     static Stage windowTeacher = new Stage();
+    static public RegistrationSystem registrationSystem;
+
     @FXML
     Button studentButton;
     @FXML
     Button teacherButton;
 
-    static public RegistrationSystem registrationSystem;
-
+    /**
+     *Initialise the student, teacher and course repository with data from files
+     * @throws IncorrectFileNameException incorrect file name given
+     * @throws IOException file reading
+     */
     @FXML
     void initialize() throws ParseException, IncorrectFileNameException, IOException {
         TeacherRepository teacherRepository = new TeacherRepository();
@@ -49,6 +54,10 @@ public class Controller {
                 teacherRepository);
     }
 
+    /**
+     * Opens the stage for student platform
+     * @throws IOException file reading
+     */
     @FXML
     public void openWindowForStudent() throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("studentRegistration.fxml"));
@@ -57,6 +66,10 @@ public class Controller {
         windowStudent.show();
     }
 
+    /**
+     * Opens the stage for teacher platform
+     * @throws IOException file reading
+     */
     @FXML
     public void openWindowForTeacher() throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("teacherLogin.fxml"));
