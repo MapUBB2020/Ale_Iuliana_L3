@@ -9,16 +9,19 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class Main extends Application {
-    static Stage primaryStage;
-
     public static void main(String[] args) {
         launch(args);
     }
 
+    /**
+     * Render the primary stage with the starting fxml file
+     * @param primaryStage the stage where user chooses to register as student or teacher
+     * @throws IOException for reading the "sample.fxml" file
+     */
     @Override
     public void start(Stage primaryStage) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
-        primaryStage.setTitle("Anwendung Universitat");
+        primaryStage.setTitle("University Platform");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
     }
