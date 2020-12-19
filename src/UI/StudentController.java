@@ -27,25 +27,35 @@ public class StudentController {
         invalidInput.setVisible(false);
     }
 
+    /**
+     * Get the user's input from the text fields and search for the student in repo,
+     * if valid, change the scene to show student info
+     */
     @FXML
-    public void login() throws IOException {
+    public void login() {
         String firstName = firstNameLogin.getText();
         String lastName = lastNameLogin.getText();
 
         List<Student> students = Controller.registrationSystem.getStudentRepository().students;
-        for (Student student: students) {
+        students.forEach(student -> {
             if (student.getFirstName().equals(firstName) && student.getLastName().equals(lastName)) {
                 EnrollmentController.studentLogged = new Student(firstName,
                         lastName,
                         student.getId(),
                         student.getTotalCredits(),
                         student.getEnrolledCourses());
-                Parent studentLogin = FXMLLoader.load(getClass().getResource("studentLogin.fxml"));
+                Parent studentLogin = null;
+                try {
+                    studentLogin = FXMLLoader.load(getClass().getResource("studentLogin.fxml"));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 Controller.windowStudent.setTitle("Student");
+                assert studentLogin != null;
                 Controller.windowStudent.setScene(new Scene(studentLogin));
                 Controller.windowStudent.show();
             }
-        }
+        });
         invalidInput.setVisible(true);
     }
 }
