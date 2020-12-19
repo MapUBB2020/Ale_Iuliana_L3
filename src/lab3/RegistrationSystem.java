@@ -12,11 +12,9 @@ import lab3.model.Teacher;
 import lab3.repository.CourseRepository;
 import lab3.repository.StudentRepository;
 import lab3.repository.TeacherRepository;
-import org.hamcrest.CoreMatchers;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -108,8 +106,8 @@ public class RegistrationSystem {
     }
 
     /**
-     *
-     * @return a list with the courses with free places (which have the size of the studentsEnrolled list smaller than the maximum capacity
+     * @return a list with the courses with free places (which have the size of the studentsEnrolled list
+     * smaller than the maximum capacity)
      * of enrollment)
      */
     public List<Course> retrieveCoursesWithFreePlaces() {
@@ -119,7 +117,6 @@ public class RegistrationSystem {
                 coursesWithFreePlaces.add(course);
         return coursesWithFreePlaces;
     }
-    //cand afisez o sa fac un for si afisez pt fiecare curs numarul de locuri libere
 
     /**
      *
@@ -133,7 +130,8 @@ public class RegistrationSystem {
      *
      * @param id for a course
      * @return the students enrolled for the course with a given id
-     * searches through the list of all courses and when the course with the given id is found, returns the list with enrolled students
+     * searches through the list of all courses and when the course with the given id is found,
+     * returns the list with enrolled students
      */
     public List<Student> retrieveStudentsEnrolledForACourse(Long id) {
         Course course = new Course();
@@ -183,13 +181,13 @@ public class RegistrationSystem {
      */
     public List<Course> sortByCredits() {
         List<Course> sortedCourses = courseRepository.findAll();
-        sortedCourses.sort((course1, course2) -> course1.getCredits() - course2.getCredits());
+        sortedCourses.sort(Comparator.comparingInt(Course::getCredits));
         return sortedCourses;
     }
 
     /**
      * Method that filters the courses for a particular teacher
-     * @param teacher
+     * @param teacher teacher to show courses for
      * @return a list of courses that have the same teacher
      */
     public List<Course> filterByTeacher(Person teacher) {
