@@ -22,29 +22,29 @@ public class StartApp {
      * @param args command line arguments
      */
     public static void main(String[] args) throws IOException, ParseException, NullPointerException, IncorrectFileNameException {
-        TeacherRepository teacherRepository = new TeacherRepository();
-
-        teacherRepository.initialise();
-
-        CourseRepository courseRepository = new CourseRepository(teacherRepository.teachers);
-        courseRepository.initialise();
-
-        StudentRepository studentRepository = new StudentRepository(courseRepository.courseRepo);
-        try {
-            studentRepository.initialise();
-        } catch (Exception NullPointerException) {
-            System.out.println("No students");
-        }
-
-        courseRepository.setRelations(studentRepository);
-        teacherRepository.setRelations(courseRepository);
-
-        RegistrationSystem registrationSystem = new RegistrationSystem(courseRepository,
-                studentRepository,
-                teacherRepository);
-
-        Console console = new Console(registrationSystem);
-        console.run();
-        registrationSystem.writeToJson();
+//        TeacherRepository teacherRepository = new TeacherRepository();
+//
+//        teacherRepository.initialise();
+//
+//        CourseRepository courseRepository = new CourseRepository(teacherRepository.teachers);
+//        courseRepository.initialise();
+//
+//        StudentRepository studentRepository = new StudentRepository(courseRepository.courseRepo);
+//        try {
+//            studentRepository.initialise();
+//        } catch (Exception NullPointerException) {
+//            System.out.println("No students");
+//        }
+//
+//        courseRepository.setRelations(studentRepository);
+//        teacherRepository.setRelations(courseRepository);
+//
+//        RegistrationSystem registrationSystem = new RegistrationSystem(courseRepository,
+//                studentRepository,
+//                teacherRepository);
+//
+//        Console console = new Console(registrationSystem);
+//        console.run();
+//        registrationSystem.writeToJson();
     }
 }
