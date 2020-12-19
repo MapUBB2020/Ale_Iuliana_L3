@@ -2,23 +2,16 @@ package lab3.repository;
 
 import JSONParser.CourseDataReader;
 import JSONParser.CourseId;
-import JSONParser.TeacherId;
 import lab3.model.Course;
-import lab3.model.Person;
 import lab3.model.Student;
 import lab3.model.Teacher;
 
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class CourseRepository implements ICrudRepository<Course>{
-//    public List<Course> courseRepo = new ArrayList<>(Arrays.asList(
-//            new Course((long) 1, "BD", new Teacher(new ArrayList<Course>(), (long) 1, "Diana", "Troanca"), 30, new ArrayList<Student>(),6),
-//            new Course((long) 2, "MAP", new Teacher(new ArrayList<Course>(), (long) 2, "Catalin", "Rusu"), 30, new ArrayList<Student>(),6)));
-
     CourseDataReader courseDataReader = new CourseDataReader();
     public List<Course> courseRepo = new ArrayList<>();
     public List<Teacher> teacherRepo = new ArrayList<>();

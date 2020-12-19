@@ -170,8 +170,7 @@ public class StudentRepository implements ICrudRepository<Student>{
             if (stud.getId().equals(entity.getId())){
                 stud.setFirstName(entity.getFirstName());
                 stud.setLastName(entity.getLastName());
-                //stud.setTotalCredits(entity.getTotalCredits());
-                //stud.setEnrolledCourses(entity.getEnrolledCourses());
+                stud.setTotalCredits(entity.getTotalCredits());
                 return null;
             }
         }
