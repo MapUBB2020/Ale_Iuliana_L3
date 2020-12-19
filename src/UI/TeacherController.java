@@ -1,6 +1,5 @@
 package UI;
 
-import Exceptions.IncorrectFileNameException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,7 +12,6 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import lab3.model.Teacher;
 import java.io.IOException;
-import java.text.ParseException;
 
 public class TeacherController {
     public static String teacherIdText;
@@ -36,11 +34,16 @@ public class TeacherController {
         validation.setVisible(false);
     }
 
+    /**
+     * Teacher login, changes the scene if user input is correct
+     * @param actionEvent login button
+     * @throws IOException file reading
+     */
     @FXML
-    public void changeSceneOfTeacherLogin(ActionEvent actionEvent) throws IOException, IncorrectFileNameException, ParseException {
+    public void changeSceneOfTeacherLogin(ActionEvent actionEvent) throws IOException {
         teacherIdText = teacherID.getText();
-        firstNameText = firstName.getText().toString();
-        lastNameText = lastName.getText().toString();
+        firstNameText = firstName.getText();
+        lastNameText = lastName.getText();
 
         boolean found = false;
         for (Teacher teacher : Controller.registrationSystem.getTeacherRepository().teachers)
@@ -56,12 +59,9 @@ public class TeacherController {
             Controller.windowTeacher.show();
         }
 
-        if (!found)
-        {
+        if (!found) {
             validation.setVisible(true);
             validation.setText("Either ID, first name or last name is incorrect!");
         }
-
-
     }
 }

@@ -20,9 +20,12 @@ public class TeacherPlatform implements Observer {
     @FXML
     public VBox mainPane;
 
-    public static Label staticCoursesInfo;
-    public static Teacher teacherLogged;
+    public static Label staticCoursesInfo = new Label();
+    public static Teacher teacherLogged = new Teacher();
 
+    /**
+     * Show teacher data and the info for the teacher's courses
+     */
     @FXML
     public void initialize() {
         staticCoursesInfo = coursesInfo;
@@ -31,26 +34,33 @@ public class TeacherPlatform implements Observer {
         showCoursesInfo();
     }
 
+    /**
+     * When an update is being made in the student platform, the teacher platform updates automatically
+     * @param o the teacher platform, which is the observable
+     */
     @Override
     public void update(Observable o, Object arg) {
         showCoursesInfo();
     }
 
+    /**
+     * Show students enrolled to teacher's courses
+     */
     public void showCoursesInfo() {
-        String coursesInfo = "";
-        for(Course course :teacherLogged.getCourses()) {
-            coursesInfo += "Course: " + "\t" + course.getName() + "\n";
+        StringBuilder coursesInfo = new StringBuilder();
+        for (Course course: teacherLogged.getCourses()) {
+            coursesInfo.append("Course: " + "\t").append(course.getName()).append("\n");
             if (course.getStudentsEnrolled().size() == 0) {
-                coursesInfo += "No students";
+                coursesInfo.append("No students");
                 break;
             }
-            coursesInfo += "Enrolled students: \n";
+            coursesInfo.append("Enrolled students: \n");
             int i = 1;
             for (Student student : course.getStudentsEnrolled()) {
-                coursesInfo = coursesInfo + "\t" + i + ". " + student.firstName + " " + student.lastName + "\n";
+                coursesInfo.append("\t").append(i).append(". ").append(student.firstName).append(" ").append(student.lastName).append("\n");
                 i++;
             }
         }
-        staticCoursesInfo.setText(coursesInfo);
+        staticCoursesInfo.setText(coursesInfo.toString());
     }
 }
